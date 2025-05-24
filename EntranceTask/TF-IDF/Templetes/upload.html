@@ -1,0 +1,27 @@
+<!--Azizbek Axmatjonov-->
+<!--Simple HTML structure for Uploading document-->
+<!DOCTYPE html>
+<html>
+    <!--Page Settings including references to the styles-->
+<head>
+    <title>Upload File</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<!--Main structure-->
+<body>
+    <div class="main-container">
+
+        <h1>Azizbek Axmatjonov TF-IDF Prject for EAST GAMES</h1>
+        <h2>Upload a Text File</h2>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".txt" required>
+            <button type="submit">Upload</button>
+        </form>
+        
+        <img class="corner-logo" src="../static/images/Alucard.jpg" alt="Corner Logo">
+        
+    </div>
+</body>
+<!--End of the main structure-->
+</html>

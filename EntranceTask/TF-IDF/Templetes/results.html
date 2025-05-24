@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TF-IDF Results</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <div class="main-container">
+        <h1>Azizbek Axmatjonov TF-IDF Prject for EAST GAMES</h1>
+        <form action="/" method="get">
+            <button type="submit">⬅ Back to Upload</button>
+        </form>
+
+        <h2>Top 50 Words by IDF</h2>
+        <table border="1">
+            <tr><th>Word</th><th>TF-IDF</th></tr>
+            {% for word, score in results %}
+            <tr><td>{{ word }}</td><td>{{ '%.6f'|format(score) }}</td></tr>
+            {% endfor %}
+        </table>
+        
+        <img class="corner-logo" src="../static/images/Alucard.jpg" alt="Corner Logo">
+    </div>
+
+
+</body>
+</html>
