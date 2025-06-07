@@ -1,0 +1,85 @@
+/* General Reset */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #E0E0E0;
+}
+
+/* Landing Section Layout */
+.a_a-landing-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  text-align: center;
+}
+
+/* Title Styling */
+.a_a-landing-title {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: #BB86FC;
+}
+
+/* Navigation Links */
+.a_a-landing-nav {
+  display: flex;
+  gap: 2rem;
+}
+
+/* Link Common Style */
+.a_a-link {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+/* Sign Up Button */
+.a_a-link[href="/register"] {
+  background-color: #BB86FC;
+  color: #121212;
+}
+
+.a_a-link[href="/register"]:hover {
+  background-color: #9d65e2;
+  box-shadow: 0 0 12px #BB86FC;
+}
+
+/* Log In Button */
+.a_a-link[href="/login"] {
+  background-color: #03DAC5;
+  color: #121212;
+}
+
+.a_a-link[href="/login"]:hover {
+  background-color: #01c0af;
+  box-shadow: 0 0 12px #03DAC5;
+}
+
+/* Success Message */
+.a_a-success-message {
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  background-color: #2e7d32; /* Deep green */
+  color: #E0E0E0;
+  border: 1px solid #66bb6a;
+  border-radius: 8px;
+  animation: glowSuccess 1s ease-in-out infinite alternate;
+  font-weight: bold;
+}
+
+@keyframes glowSuccess {
+  from {
+    box-shadow: 0 0 8px #66bb6a;
+  }
+  to {
+    box-shadow: 0 0 16px #a5d6a7;
+  }
+}

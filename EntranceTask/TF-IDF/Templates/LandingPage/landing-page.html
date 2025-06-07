@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome - TF-IDF App{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ url_for('static', path='styles/LandingPage/landing-page.css') }}" />
+{% endblock %}
+
+{% block content %}
+<section class="a_a-landing-section">
+    <h1 class="a_a-landing-title">Welcome to TF-IDF App</h1>
+    <nav class="a_a-landing-nav">
+        <a href="/register" class="a_a-link">Sign Up</a> |
+        <a href="/login" class="a_a-link">Log In</a>
+    </nav>
+    {% if request.query_params.register_status == 'success' %}
+        <div class="a_a-success-message">Registration successful! You can now log in.</div>
+    {% endif %}
+</section>
+
+{% block scripts %}
+<script src="{{ url_for('static', path='scripts/landing-page-script.js') }}"></script>
+{% endblock %}
+{% endblock %}

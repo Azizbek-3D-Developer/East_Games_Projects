@@ -60,7 +60,7 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Jinja framework used for rendering HTML files
-templates = Jinja2Templates(directory="Templetes")
+templates = Jinja2Templates(directory="Templates")
 
 # Creating upload directory
 UPLOAD_DIR = os.getenv("UPLOAD_DIR", "uploads") # Task 1 adjustments
@@ -71,7 +71,7 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 # Default link called
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
-    return templates.TemplateResponse("upload.html", {"request": request}) # Landing page of the Application
+    return templates.TemplateResponse("landing-page.html", {"request": request}) # Landing page of the Application
 
 
 @app.post("/upload", response_class=HTMLResponse)

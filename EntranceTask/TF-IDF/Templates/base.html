@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}TF-IDF App{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='styles/base-styles.css') }}" />
+    {% block stylesheets %}
+    {% endblock %}
+</head>
+<body>
+    <nav class="a_a-navbar">
+        <div class="a_a-nav-left">
+            <img src="{{ url_for('static', path='images/Alucard.jpg') }}" alt="Alucard" class="a_a-nav-avatar" />
+            <a href="/" class="a_a-nav-brand">TF-IDF App</a>
+        </div>
+        <div class="a_a-nav-right">
+            {% block nav_buttons %}
+            {% endblock %}
+        </div>
+    </nav>
+
+    <main class="a_a-main-content">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="a_a-footer">
+        <p>© 2025 TF-IDF App by Azizbek</p>
+    </footer>
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ url_for('static', path='styles/error-styles.css') }}" />
+{% endblock %}
+
+{% block content %}
+<div class="a_a-error-page">
+    <h1>404 - Page Not Found</h1>
+    <p>Sorry, the page you requested does not exist.</p>
+    <a href="/">Go back to home</a>
+</div>
+{% endblock %}

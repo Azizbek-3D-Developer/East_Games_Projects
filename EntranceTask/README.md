@@ -43,7 +43,10 @@ The project also features a dark-themed interface with basic styling, allowing u
 4. **Monitoring**: System endpoints allow version checking, application health status, and performance metrics.
 
 ---
+### Project DataBase Structure
+📘 [View Database Schema](db_schema/DB_STRUCTURE.md)
 
+---
 ### 📁 Project Structure
 
 ├── main.py # FastAPI application

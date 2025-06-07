@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', path='styles/Dashboard/dashboard-styles.css') }}" />
+  {% block secondary_stylesheets %}
+  
+  {% endblock %}
+{% endblock %}
+
+{% block content %}
+<div class="a_a-dashboard-container">
+  <aside class="a_a-sidebar">
+    <nav class="a_a-nav">
+      <button class="a_a-btn">Statistics</button>
+      <button class="a_a-btn">Collections</button>
+      <button class="a_a-btn">Settings</button>
+      <!-- Add more buttons as needed -->
+    </nav>
+    <form action="/logout" method="get" class="a_a-logout-form">
+      <button class="a_a-logout-btn">Log Out</button>
+    </form>
+  </aside>
+
+  <main class="a_a-main-content">
+    <h1 class="a_a-title">Welcome to Your Dashboard</h1>
+    <p class="a_a-description">You are now logged in. Here you can manage your TF-IDF resources, analyze text, and more.</p>
+
+    <div class="a_a-data-display">
+      <!-- Dynamic content like stats, collections, etc. will go here -->
+       {% block data_container %}
+       {% endblock %}
+    </div>
+  </main>
+</div>
+{% endblock %}

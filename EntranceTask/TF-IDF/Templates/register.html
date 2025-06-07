@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Register - TF-IDF App{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ url_for('static', path='styles/register-styles.css') }}" />
+{% endblock %}
+
+{% block content %}
+<section class="a_a-register-section">
+    <h2 class="a_a-register-title">Sign Up</h2>
+    <form action="/register" method="post" class="a_a-register-form">
+        <label for="username" class="a_a-label">Username:</label><br>
+        <input type="text" id="username" name="username" required class="a_a-input"><br><br>
+        <input type="text" id="useremail" name="useremail" required class="a_a-input"><br><br>
+        <label for="password" class="a_a-label">Password:</label><br>
+        <input type="password" id="password" name="password" required class="a_a-input"><br><br>
+
+        <button type="submit" class="a_a-btn-submit">Register</button>
+    </form>
+</section>
+{% endblock %}

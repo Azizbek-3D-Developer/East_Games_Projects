@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Registration Successful{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ url_for('static', path='styles/register-success-styles.css') }}" />
+{% endblock %}
+
+{% block content %}
+<section class="a_a-register-success-section">
+    <h2 class="a_a-register-success-title">Thank you for registering, {{ username }}!</h2>
+    <a href="/" class="a_a-link-home">Go to Home</a>
+</section>
+{% endblock %}

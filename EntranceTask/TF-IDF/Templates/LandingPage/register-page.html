@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Register - TF-IDF App{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ url_for('static', path='styles/LandingPage/register-styles.css') }}" />
+{% endblock %}
+
+{% block content %}
+<section class="a_a-register-section">
+  <h2 class="a_a-register-title">Create an Account</h2>
+
+  <form method="post" action="/register" class="a_a-register-form">
+    <div class="a_a-form-group">
+      <label for="a_a-useremail" class="a_a-form-label">Email</label>
+      <input type="email" id="a_a-useremail" name="email" placeholder="you@example.com" required minlength="11" maxlength="50" class="a_a-form-input" autocomplete="email"/>
+    </div>
+
+    <div class="a_a-form-group">
+      <label for="a_a-username" class="a_a-form-label">Username</label>
+      <input type="text" id="a_a-username" name="username" placeholder="Your username" required minlength="3" maxlength="30" class="a_a-form-input" autocomplete="username" />
+    </div>
+
+    <div class="a_a-form-group">
+      <label for="a_a-password" class="a_a-form-label">Password</label>
+      <input type="password" id="a_a-password" name="password" placeholder="At least 6 characters" required minlength="6" class="a_a-form-input"  />
+    </div>
+
+    <button type="submit" class="a_a-btn a_a-btn-primary">Register</button>
+  </form>
+</section>
+
+{% if error %}
+  <div class="a_a-error-message">{{ error }}</div>
+{% endif %}
+
+{% endblock %}

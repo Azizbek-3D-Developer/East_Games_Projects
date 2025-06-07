@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Login - TF-IDF App{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ url_for('static', path='styles/LandingPage/login-styles.css') }}" />
+{% endblock %}
+
+{% block content %}
+<section class="a_a-login-section">
+  <h2 class="a_a-login-title">Log In to Your Account</h2>
+
+  <form method="post" action="/login" class="a_a-login-form">
+    <div class="a_a-form-group">
+      <label for="a_a-useremail" class="a_a-form-label">Email</label>
+      <input type="email" id="a_a-useremail" name="email" placeholder="you@example.com" required class="a_a-form-input" />
+    </div>
+
+    <div class="a_a-form-group">
+      <label for="a_a-password" class="a_a-form-label">Password</label>
+      <input type="password" id="a_a-password" name="password" placeholder="Your password" required class="a_a-form-input" />
+    </div>
+
+    <button type="submit" class="a_a-btn a_a-btn-login">Log In</button>
+  </form>
+</section>
+
+{% if error %}
+  <div class="a_a-error-message">{{ error }}</div>
+{% endif %}
+{% endblock %}
