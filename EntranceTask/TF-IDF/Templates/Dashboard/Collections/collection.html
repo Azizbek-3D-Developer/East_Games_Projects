@@ -1,0 +1,31 @@
+{% extends "Dashboard/dashboard.html" %}
+
+{% block title %}Collections{% endblock %}
+
+{% block secondary_stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', path='styles/Dashboard/Collections/collections-styles.css') }}" />
+{% endblock %}
+
+{% block data_container %}
+  <div class="a_a-collections-header">
+    <a href="/dashboard/collections" class="a_a-collections-btn active">All Collections</a>
+    <a href="/dashboard/collections/create" class="a_a-collections-btn">Create New Collection</a>
+  </div>
+
+  <div class="a_a-collections-list">
+    {% for collection in collections %}
+      <div class="a_a-collections-card">
+        <h2 class="a_a-collections-title">{{ collection.name }}</h2>
+        <div class="a_a-document-actions">
+          <a href="/dashboard/collections/{{ collection.id }}" class="a_a-card-btn">Details</a>
+          <a href="/dashboard/collections/{{ collection.id }}/edit" class="a_a-card-btn">Update</a>
+          <form action="/dashboard/collections/{{ collection.id }}/delete" method="post" class="a_a-delete-form">
+            <button type="submit" class="a_a-card-btn danger">Delete</button>
+          </form>
+        </div>
+      </div>
+    {% else %}
+    <p class="a_a-no-collections">No collection found.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

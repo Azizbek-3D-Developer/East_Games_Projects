@@ -69,3 +69,7 @@ Stores TF-IDF results for a document or aggregated per collection.
 - A document may belong to **multiple collections**.
 - IDF is shared within a collection.
 - User deletion should cascade to documents, collections, and statistics.
+
+# See the UML Diagram in the next location
+-/TF-IDF/db_schema/Db_Schema.drawio
+-/TF-IDF/db_schema/Db_Schema.jpg

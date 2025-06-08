@@ -1,0 +1,29 @@
+{% extends "Dashboard/dashboard.html" %}
+
+{% block title %}Statistics{% endblock %}
+
+{% block secondary_stylesheets %}
+<link rel="stylesheet" href="{{ url_for('static', path='styles/Dashboard/Statistics/statistics-styles.css') }}" />
+{% endblock %}
+
+{% block data_container %}
+  <div class="a_a-documents-header">
+    <a href="/dashboard/documents" class="a_a-documents-btn">All Documents</a>
+    <a href="/dashboard/statistics" class="a_a-documents-btn active">TF-IDF Stats</a>
+  </div>
+
+  <div class="a_a-documents-list">
+    {% for stat in statistics %}
+    <div class="a_a-document-card">
+      <h2 class="a_a-document-title">Statistics #{{ stat.id }}</h2>
+      <p class="a_a-document-meta">Document ID: {{ stat.document_id }}</p>
+      <p class="a_a-document-meta">Created at: {{ stat.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+      <div class="a_a-document-actions">
+        <a href="/dashboard/statistics/{{ stat.document_id }}" class="a_a-card-btn">Details</a>
+      </div>
+    </div>
+    {% else %}
+    <p class="a_a-no-documents">No statistics found.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

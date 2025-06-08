@@ -1,31 +1,142 @@
+/* error-styles.css */
+
 .a_a-error-page {
-    text-align: center;
-    margin-top: 100px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #b00020; /* a nice error red */
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #1A1A1A;
+  color: #E0E0E0;
+  text-align: center;
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(187, 134, 252, 0.4);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  animation: fadeInScale 0.8s ease forwards;
 }
 
+/* Animated glowing border */
+.a_a-error-page::before {
+  content: '';
+  position: absolute;
+  top: -4px; left: -4px; right: -4px; bottom: -4px;
+  border-radius: 16px;
+  background: linear-gradient(270deg, #BB86FC, #3700B3, #BB86FC);
+  background-size: 600% 600%;
+  animation: gradientShift 8s ease infinite;
+  filter: blur(10px);
+  opacity: 0.8;
+  z-index: -1;
+}
+
+/* Main heading */
 .a_a-error-page h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+  font-size: 4rem;
+  color: #BB86FC;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 15px #BB86FC;
+  animation: glowPulse 2.5s ease-in-out infinite alternate;
 }
 
+/* Paragraph */
 .a_a-error-page p {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+  color: #B0B0B0;
 }
 
+/* Link styled as a button */
 .a_a-error-page a {
-    text-decoration: none;
-    color: #007bff;
-    font-weight: bold;
-    border: 2px solid #007bff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #121212;
+  background-color: #BB86FC;
+  border-radius: 40px;
+  text-decoration: none;
+  box-shadow: 0 0 10px #BB86FC;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  user-select: text;
 }
 
-.a_a-error-page a:hover {
-    background-color: #007bff;
-    color: white;
+.a_a-error-page a:hover,
+.a_a-error-page a:focus {
+  background-color: #3700B3;
+  box-shadow: 0 0 25px #3700B3;
+  transform: scale(1.05);
+  outline: none;
+}
+
+/* Animations */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes glowPulse {
+  from {
+    text-shadow: 0 0 10px #BB86FC;
+  }
+  to {
+    text-shadow: 0 0 25px #3700B3;
+  }
+}
+
+/* Responsive font sizes & padding */
+@media (max-width: 768px) {
+  .a_a-error-page {
+    padding: 2rem 1.5rem;
+    border-radius: 10px;
+  }
+  .a_a-error-page h1 {
+    font-size: 3rem;
+  }
+  .a_a-error-page p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+  .a_a-error-page a {
+    font-size: 1rem;
+    padding: 0.7rem 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .a_a-error-page {
+    padding: 1.5rem 1rem;
+  }
+  .a_a-error-page h1 {
+    font-size: 2.2rem;
+  }
+  .a_a-error-page p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .a_a-error-page a {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.5rem;
+  }
 }

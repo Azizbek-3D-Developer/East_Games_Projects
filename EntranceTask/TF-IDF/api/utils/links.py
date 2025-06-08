@@ -1,0 +1,5 @@
+baselink = "/dashboard"
+doclink = "/documents"
+col_link = "/collections"
+UPLOAD_DIR = "uploads"
+statlink = "/statistics"

@@ -1,0 +1,31 @@
+{% extends "Dashboard/dashboard.html" %}
+
+{% block title %}Documents{% endblock %}
+
+{% block secondary_stylesheets %}
+<link rel="stylesheet" href="{{ url_for('static', path='styles/Dashboard/Documents/documents-styles.css') }}" />
+{% endblock %}
+
+{% block data_container %}
+  <div class="a_a-documents-header">
+    <a href="/dashboard/documents" class="a_a-documents-btn active">All Documents</a>
+    <a href="/dashboard/documents/create" class="a_a-documents-btn">Upload New</a>
+  </div>
+
+  <div class="a_a-documents-list">
+    {% for doc in documents %}
+    <div class="a_a-document-card">
+      <h2 class="a_a-document-title">{{ doc.filename }}</h2>
+      <p class="a_a-document-meta">Uploaded: {{ doc.created_at }}</p>
+      <div class="a_a-document-actions">
+        <a href="/dashboard/documents/{{ doc.id }}" class="a_a-card-btn">Details</a>
+        <form action="/dashboard/documents/{{ doc.id }}/delete" method="post" class="a_a-delete-form">
+          <button type="submit" class="a_a-card-btn danger">Delete</button>
+        </form>
+      </div>
+    </div>
+    {% else %}
+    <p class="a_a-no-documents">No documents found.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

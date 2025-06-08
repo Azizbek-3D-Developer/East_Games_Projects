@@ -1,0 +1,39 @@
+{% extends "Dashboard/dashboard.html" %}
+
+{% block title %}TF-IDF Details{% endblock %}
+
+{% block secondary_stylesheets %}
+<link rel="stylesheet" href="{{ url_for('static', path='styles/Dashboard/Statistics/statistics-styles.css') }}" />
+{% endblock %}
+
+{% block data_container %}
+  <div class="a_a-documents-header">
+    <a href="/dashboard/statistics" class="a_a-documents-btn">Back to All Statistics</a>
+  </div>
+
+  <div class="a_a-tfidf-details">
+    <h2 class="a_a-document-title">TF-IDF Results for Document #{{ stats_item.document_id }}</h2>
+    <p class="a_a-document-meta">Generated on: {{ stats_item.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+
+    <table class="a_a-tfidf-table">
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>TF</th>
+          <th>IDF</th>
+          <th>TF-IDF</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for entry in stats_item.tfidf_json %}
+        <tr>
+          <td>{{ entry.word }}</td>
+          <td>{{ '%.5f'|format(entry.tf) }}</td>
+          <td>{{ '%.5f'|format(entry.idf) }}</td>
+          <td>{{ '%.5f'|format(entry.tfidf) }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

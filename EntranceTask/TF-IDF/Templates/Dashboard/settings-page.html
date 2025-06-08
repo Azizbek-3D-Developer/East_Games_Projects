@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Settings{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ url_for('static', path='styles/Dashboard/settings-style.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="a_a-settings-container">
+    <h2 class="a_a-settings-title">⚙️ Account Settings</h2>
+
+    <!-- Update User Form -->
+    <form action="/setting" method="post" class="a_a-settings-form">
+        <input type="hidden" name="_method" value="PUT">
+
+        <label for="email" class="a_a-label">Email:</label>
+        <input type="email" name="email" id="email" value="{{ user.email }}" required class="a_a-input">
+
+        <label for="username" class="a_a-label">Username:</label>
+        <input type="text" name="username" id="username" value="{{ user.username }}" required class="a_a-input">
+
+        <label for="password" class="a_a-label">New Password:</label>
+        <input type="password" name="password" id="password" placeholder="Leave empty to keep current" class="a_a-input">
+
+        <button type="submit" class="a_a-btn-login">Save Changes</button>
+    </form>
+
+    <hr class="a_a-hr">
+
+    <!-- Delete User Form -->
+    <form action="/setting/{{ user.id }}/delete" method="post" onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.')" class="a_a-delete-form">
+        <button type="submit" class="a_a-btn-login a_a-delete-btn">
+            🗑️ Delete My Account
+        </button>
+    </form>
+
+    <a href="/dashboard" class="a_a-btn">Go back</a>
+</div>
+{% endblock %}

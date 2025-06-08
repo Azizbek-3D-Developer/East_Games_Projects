@@ -4,10 +4,21 @@ from fastapi.staticfiles import StaticFiles
 from api.utils.templates import templates
 from api.db import database
 from starlette.exceptions import HTTPException as StarletteHTTPException
+import os
+from dotenv import load_dotenv
+from api.routes import api_router
 
+
+
+load_dotenv()
+# Read config from environment variables
+APP_PORT = int(os.getenv("APP_PORT", 8000))
+UPLOAD_DIR = os.getenv("UPLOAD_DIR", "uploads")
+TOP_K_WORDS = int(os.getenv("TOP_K_WORDS", 50))
+APP_VERSION = os.getenv("APP_VERSION", "1.0.0")
 
 # importing the routes
-from api.routes.landing_route import router as landing_router
+from api.routes.LandingPage.landing_route import router as landing_router
 
 
 # Main Logic 
@@ -17,8 +28,8 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # routes
-app.include_router(landing_router) 
-
+# app.include_router(landing_router) 
+app.include_router(api_router)
 
 # custom error 404 page
 @app.exception_handler(StarletteHTTPException)
@@ -28,9 +39,22 @@ async def custom_http_exception_handler(request: Request, exc: StarletteHTTPExce
     return await app.default_exception_handler(request, exc)
 
 
+# custom error 500 page
+@app.exception_handler(Exception)
+async def internal_exception_handler(request: Request, exc: Exception):
+    return templates.TemplateResponse("error-500.html", {"request": request, "error": str(exc)}, status_code=500)
+
+
+# @app.get("/test-500")
+# async def test_500_error():
+#     1 / 0
+
+
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
+    # uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("app:app", host="0.0.0.0", port=APP_PORT, reload=True)
+    # uvicorn.run("app:app", host="0.0.0.0", port=7000, reload=True)
     
-    
+
 # http://localhost:8000/

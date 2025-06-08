@@ -1,0 +1,35 @@
+{% extends "Dashboard/dashboard.html" %}
+
+{% block title %}Update Collection{% endblock %}
+
+{% block secondary_stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', path='styles/Dashboard/Collections/collections-styles.css') }}" />
+{% endblock %}
+
+{% block data_container %}
+  <div class="a_a-collections-header">
+    <a href="/dashboard/collections" class="a_a-collections-btn">All Collections</a>
+    <a href="/dashboard/collections/create" class="a_a-collections-btn">Create New Collection</a>
+  </div>
+
+  <div class="a_a-collections-list">
+    <form action="/dashboard/collections/{{ collection.id }}/edit" method="post" class="a_a-collection-form">
+      <div class="form-group">
+        <label for="name">Collection Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="e.g., music"
+          required
+          minlength="5"
+          maxlength="50"
+          value="{{ collection.name }}"
+        />
+        <small>Used for describing the name of the collection</small>
+      </div>
+
+      <button type="submit" class="a_a-submit-btn">Update Collection</button>
+    </form>
+  </div>
+{% endblock %}

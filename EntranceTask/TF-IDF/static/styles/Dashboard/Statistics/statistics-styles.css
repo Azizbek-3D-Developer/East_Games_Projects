@@ -1,0 +1,152 @@
+/* General layout and section styling */
+.a_a-documents-header {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1rem auto;
+  padding: 1rem;
+}
+
+.a_a-documents-btn {
+  padding: 0.6rem 1.5rem;
+  border-radius: 1.5rem;
+  background-color: #f0f0f0;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.a_a-documents-btn.active {
+  background-color: #4f46e5;
+  color: #fff;
+}
+
+.a_a-documents-btn:hover {
+  background-color: #6366f1;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.a_a-documents-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* Statistics Card */
+.a_a-document-card {
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 1.2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.a_a-document-card:hover {
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+}
+
+.a_a-document-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.a_a-document-meta {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.a_a-document-actions {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.a_a-card-btn {
+  padding: 0.4rem 0.9rem;
+  border-radius: 1rem;
+  background-color: #4f46e5;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.a_a-card-btn:hover {
+  background-color: #4338ca;
+}
+
+.a_a-card-btn.danger {
+  background-color: #dc2626;
+}
+
+.a_a-card-btn.danger:hover {
+  background-color: #b91c1c;
+}
+
+.a_a-no-documents {
+  text-align: center;
+  margin-top: 2rem;
+  font-style: italic;
+  color: #999;
+}
+
+/* TF-IDF Detail Table */
+.a_a-tfidf-details {
+  max-width: 950px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.a_a-tfidf-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+}
+
+.a_a-tfidf-table thead {
+  background-color: #4f46e5;
+  color: white;
+}
+
+.a_a-tfidf-table th,
+.a_a-tfidf-table td {
+  padding: 0.8rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 0.95rem;
+}
+
+.a_a-tfidf-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+/* Sticky Navigation Animation */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+  background-color: #ffffff;
+}
+
+/* Hide and show header on scroll */
+body {
+  scroll-behavior: smooth;
+}
+
+.hide-navbar {
+  transform: translateY(-100%);
+}
+
+.show-navbar {
+  transform: translateY(0);
+}

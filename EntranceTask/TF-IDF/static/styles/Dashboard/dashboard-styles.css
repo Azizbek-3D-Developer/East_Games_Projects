@@ -1,127 +1,163 @@
-/* Make sure html and body take full viewport */
+/* Global fix */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100vh;
-  overflow: hidden; /* prevent unwanted scroll */
+  height: 100%;
+  overflow-x: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212;
+  color: #e0e0e0;
 }
 
+/* Dashboard Layout */
 .a_a-dashboard-container {
   display: flex;
-  height: 100vh; /* full viewport height */
-  width: 95vw;  /* full viewport width */
-  gap: 20px;
-  box-sizing: border-box;
-  background-color: var(--bg-color, #f9f9f9);
-  color: var(--text-color, #222);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0%;
-  padding: 0%;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
-
-/* Sidebar styling */
+/* Sidebar - 1/4 */
 .a_a-sidebar {
   flex: 1;
-  background-color: var(--sidebar-bg, #2c3e50);
-  color: var(--sidebar-text, #ecf0f1);
-  padding: 20px;
+  width: 25%;
+  max-width: 25%;
+  background-color: #1f1b24;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 0px;
+  box-shadow: 2px 0 8px rgba(187, 134, 252, 0.25);
 }
 
-.a_a-main-content {
-    flex-grow: 1;
-    width: 100%;
-    max-width: 100%;
-    margin: 0px;
-    padding: 20px;
-}
-/* Navigation buttons */
+/* Nav Buttons */
 .a_a-nav {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 1.2rem;
+  margin:20px;
 }
 
 .a_a-btn {
-  padding: 12px 18px;
-  background-color: var(--btn-bg, #34495e);
-  border: none;
-  border-radius: 6px;
-  color: var(--btn-text, #ecf0f1);
-  cursor: pointer;
+  background: transparent;
+  color: #bb86fc;
   font-weight: 600;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
+  font-size: 1.1rem;
+  padding: 0.75rem 1rem;
+  border: 2px solid #bb86fc;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-.a_a-btn:hover {
-  background-color: var(--btn-hover-bg, #1abc9c);
-  color: #fff;
+.a_a-btn:hover,
+.a_a-btn:focus {
+  background-color: #bb86fc;
+  color: #121212;
+  box-shadow: 0 0 15px #bb86fcaa;
+  outline: none;
 }
 
-/* Logout button style */
+/* Logout Button */
 .a_a-logout-form {
-  margin-top: 30px;
+  margin: 20px;
 }
 
 .a_a-logout-btn {
   width: 100%;
-  padding: 12px 0;
-  background-color: var(--logout-bg, #e74c3c);
-  border: none;
-  border-radius: 6px;
-  color: white;
+  padding: 0.7rem 0;
   font-weight: 700;
+  font-size: 1.1rem;
+  background-color: #cf6679;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  box-shadow: 0 5px 14px #cf6679cc;
+  transition: all 0.3s ease;
 }
 
-.a_a-logout-btn:hover {
-  background-color: #c0392b;
+.a_a-logout-btn:hover,
+.a_a-logout-btn:focus {
+  background-color: #a94558;
+  box-shadow: 0 7px 20px #a94558cc;
+  transform: translateY(-2px);
 }
 
-/* Main content area */
+/* Main Content - 3/4 */
 .a_a-main-content {
   flex: 3;
-  background-color: var(--main-bg, #c1b4b4);
-  border-radius: 8px;
-  padding: 0px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  overflow-y: auto;
   width: 100%;
+  max-width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background-color: #17141f;
+  padding: 0px;
+  box-shadow: inset 0 0 20px #333;
 }
 
-/* Title and description */
-.a_a-title {
-  margin: 0;
-  padding: 10px;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--main-title-color, #2c3e50);
-}
-
-.a_a-description {
-  font-size: 1.1rem;
-  color: var(--main-text-color, #555);
-  margin-bottom: 20px;
-  padding: 10px;
-}
-
-/* Data display container */
+/* Data Display Block */
 .a_a-data-display {
-  flex-grow: 1;
-  background-color: var(--data-display-bg, #f0f3f7);
-  border-radius: 6px;
-  margin: 0px 20px 20px 20px;
-  padding: 20px;
-  box-sizing: border-box;
-  /* You can add scroll or grid/flex here for content */
+  width: 100%;
+  height: 100%;
+  background: #26222f;
+  border-radius: 14px;
+  padding: 2rem;
+  box-shadow: 0 0 25px #bb86fc44;
+  font-size: 1rem;
   overflow-y: auto;
 }
+
+/* Scrollbar Styling */
+.a_a-main-content::-webkit-scrollbar {
+  width: 8px;
+}
+.a_a-main-content::-webkit-scrollbar-thumb {
+  background: #bb86fcaa;
+  border-radius: 10px;
+}
+.a_a-main-content::-webkit-scrollbar-track {
+  background: #121212;
+}
+
+/* Responsive Behavior */
+@media (max-width: 1024px) {
+  .a_a-dashboard-container {
+    flex-direction: column;
+  }
+
+  .a_a-sidebar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 100%;
+    padding: 20px;
+    box-shadow: none;
+  }
+
+  .a_a-nav {
+    flex-direction: row;
+    gap: 0.7rem;
+    padding:20px;
+  }
+
+  .a_a-main-content {
+    max-width: 100%;
+    padding: 10px;
+    margin: 0px;  
+  }
+
+  .a_a-data-display {
+    padding: 1rem;
+  }
+}
+
+
+/**/

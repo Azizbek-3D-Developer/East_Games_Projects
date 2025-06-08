@@ -1,0 +1,44 @@
+{% extends "Dashboard/dashboard.html" %}
+
+{% block title %}Document Details{% endblock %}
+
+{% block secondary_stylesheets %}
+<link rel="stylesheet" href="{{ url_for('static', path='styles/Dashboard/Documents/documents-details-styles.css') }}" />
+{% endblock %}
+
+{% block data_container %}
+  <div class="document-details-container">
+    <h1>Document Details</h1>
+
+    <section class="document-info">
+      <h2>{{ document.filename }}</h2>
+      <p><strong>Uploaded at:</strong> {{ document.uploaded_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+    </section>
+
+    <section class="tfidf-stats">
+      <h3>TF-IDF Statistics</h3>
+      {% if statistics and statistics.tfidf_json %}
+        <table class="tfidf-table">
+          <thead>
+            <tr>
+              <th>Term</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in statistics.tfidf_json %}
+            <tr>
+              <td>{{ item.term }}</td>
+              <td>{{ "%.4f"|format(item.score) }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>No TF-IDF data available for this document.</p>
+      {% endif %}
+
+      <a href="/dashboard/documents">← Back to Documents</a>
+
+  </div>
+{% endblock %}

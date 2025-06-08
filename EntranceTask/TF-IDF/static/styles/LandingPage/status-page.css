@@ -1,0 +1,14 @@
+.a_a-success-message {
+  font-size: 3rem;
+  color: #28a745; /* green success color */
+  font-weight: bold;
+  text-align: center;
+  padding: 1rem 2rem;
+  border: 3px solid #28a745;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(40, 167, 69, 0.5);
+  background-color: #e6ffe6;
+  user-select: none;
+  width: 100%;
+  max-width: 500px;
+}

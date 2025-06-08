@@ -2,6 +2,8 @@ import os
 from databases import Database
 from sqlalchemy import create_engine, MetaData
 from dotenv import load_dotenv
+from api.services.metric_service import MetricsService
+
 
 load_dotenv()
 
@@ -16,3 +18,6 @@ metadata = MetaData()
 
 # SQLAlchemy engine for table creation or sync ops
 engine = create_engine(DATABASE_URL)
+
+
+metrics_service = MetricsService(database)

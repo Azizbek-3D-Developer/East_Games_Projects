@@ -1,0 +1,90 @@
+/* Container styling */
+.document-details-container {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(187, 134, 252, 0.1);
+}
+
+/* Section headers */
+.document-details-container h1,
+.document-details-container h2,
+.document-details-container h3 {
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+/* Document info section */
+.document-info {
+  margin-bottom: 2rem;
+}
+
+/* Table wrapper (optional if you want horizontal scroll on small screens) */
+.tfidf-stats {
+  overflow-x: auto;
+}
+
+/* TF-IDF Table styles */
+.tfidf-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tfidf-table th,
+.tfidf-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #444;
+  color: var(--primary-text);
+}
+
+.tfidf-table th {
+  background-color: var(--accent);
+  color: #121212;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.tfidf-table tbody tr:hover {
+  background-color: #373737;
+  transition: background-color 0.3s ease;
+}
+
+/* Back link styling */
+.tfidf-stats a {
+  display: inline-block;
+  margin-top: 1.5rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.tfidf-stats a:hover {
+  color: white;
+}
+.tfidf-table {
+  width: 100%;
+  border-collapse: separate;     /* Allows spacing between rows */
+  border-spacing: 0 12px;        /* Adds vertical space between rows */
+  min-width: 600px;
+  background-color: transparent; /* Needed to avoid color leaks between gaps */
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tfidf-table th,
+.tfidf-table td {
+  padding: 1rem 1.2rem;           /* Increased padding for taller rows */
+  text-align: left;
+  background-color: #2a2a2a;      /* Apply background to each cell to preserve look */
+  border-bottom: none;
+  color: var(--primary-text);
+  border-radius: 6px;
+}
