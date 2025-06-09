@@ -28,7 +28,14 @@
     <div class="a_a-data-display">
        {% block data_container %}
        {% endblock %}
+       
     </div>
   </main>
 </div>
+{% if request.query_params.update == 'success' %}
+  <div class="a_a-update-success-message">Profile updated successfully!</div>
+{% endif %}
+{% block scripts %}
+<script src="{{ url_for('static', path='scripts/dashboard-script.js') }}"></script>
+{% endblock %}
 {% endblock %}

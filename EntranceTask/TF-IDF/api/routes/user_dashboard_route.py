@@ -62,7 +62,7 @@ async def setting_post(
         raise HTTPException(status_code=404, detail="User not found or update failed")
 
     # Redirect back to settings page after successful update
-    response = RedirectResponse(url="/dashboard", status_code=303)
+    response = RedirectResponse(url="/dashboard?update=success", status_code=303)
     return response
 
 
@@ -89,6 +89,6 @@ async def delete_user_post(
     if not deleted_user:
         raise HTTPException(status_code=404, detail="User not found or delete failed")
 
-    response = RedirectResponse(url="/", status_code=303)
-    response.delete_cookie("access_token")  # Clear cookie on logout after delete
+    response = RedirectResponse(url="/?delete_status=success", status_code=303)
+    response.delete_cookie("access_token")  
     return response

@@ -16,6 +16,11 @@
     {% if request.query_params.register_status == 'success' %}
         <div class="a_a-success-message">Registration successful! You can now log in.</div>
     {% endif %}
+    {% if request.query_params.delete_status == 'success' %}
+        <div class="a_a-success-message" id="delete-success-message">
+            Your account was deleted successfully.
+        </div>
+    {% endif %}
 </section>
 
 {% block scripts %}

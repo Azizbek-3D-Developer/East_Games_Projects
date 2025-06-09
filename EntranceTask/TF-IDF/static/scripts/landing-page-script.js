@@ -13,3 +13,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 10000); // 10 seconds
   }
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Select any success message div by class or ID
+  const successMessages = document.querySelectorAll(".a_a-success-message");
+  
+  if (successMessages.length > 0) {
+    setTimeout(() => {
+      successMessages.forEach(msg => {
+        msg.style.transition = "opacity 1s ease";
+        msg.style.opacity = "0";
+        setTimeout(() => {
+          if (msg.parentNode) {
+            msg.parentNode.removeChild(msg);
+          }
+        }, 1000);
+      });
+    }, 10000); 
+  }
+});
