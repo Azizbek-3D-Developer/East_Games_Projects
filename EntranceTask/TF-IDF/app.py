@@ -9,13 +9,12 @@ from dotenv import load_dotenv
 from api.routes import api_router
 
 
-
 load_dotenv()
 # Read config from environment variables
-APP_PORT = int(os.getenv("APP_PORT", 8000))
+APP_PORT = int(os.getenv("APP_PORT", 6000))
 UPLOAD_DIR = os.getenv("UPLOAD_DIR", "uploads")
 TOP_K_WORDS = int(os.getenv("TOP_K_WORDS", 50))
-APP_VERSION = os.getenv("APP_VERSION", "1.0.0")
+APP_VERSION = os.getenv("APP_VERSION", "3.0.0")
 
 # importing the routes
 from api.routes.LandingPage.landing_route import router as landing_router
@@ -28,7 +27,6 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # routes
-# app.include_router(landing_router) 
 app.include_router(api_router)
 
 # custom error 404 page

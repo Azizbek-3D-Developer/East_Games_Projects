@@ -17,6 +17,8 @@
             <li><strong>Avg Processing Time:</strong> {{ metrics.avg_time_processed }} sec</li>
             <li><strong>Max Processing Time:</strong> {{ metrics.max_time_processed }} sec</li>
             <li><strong>Last Processed:</strong> {{ metrics.latest_file_processed_timestamp | datetimeformat }}</li>
+            <li><strong>Total Upload Size:</strong> {{ metrics.total_upload_size_bytes }} bytes</li>
+            <li><strong>Last Uploaded Filename:</strong> {{ metrics.last_uploaded_filename }}</li>
         </ul>
     </div>
 </div>

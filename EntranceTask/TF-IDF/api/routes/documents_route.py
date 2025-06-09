@@ -75,7 +75,11 @@ async def upload_document(
         )
         await create_statistics(statistics_data)
 
-        await metrics_service.update_metrics(processing_duration)
+        await metrics_service.update_metrics(
+            processing_duration=processing_duration,
+            upload_size_bytes=len(content),
+            uploaded_filename=file.filename
+        )
         
         return RedirectResponse(
             url=f"{baselink}{doclink}/{doc_data['id']}",
