@@ -14,8 +14,7 @@ class StatisticsCreate(BaseModel):
 
 
 class StatisticsUpdate(BaseModel):
-    """Schema for updating existing TF-IDF statistics"""
-    tfidf_json: Optional[Dict[str, Any]] = Field(None, description="Updated TF-IDF scores")
+    tfidf_json: Optional[List[Dict[str, Any]]] = Field(None, description="Updated TF-IDF scores")
 
 
 class StatisticsRead(StatisticsBase):

@@ -7,6 +7,8 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 import os
 from dotenv import load_dotenv
 from api.routes import api_router
+from api.db import DATABASE_URL
+from contextlib import asynccontextmanager
 
 
 load_dotenv()
@@ -18,6 +20,14 @@ APP_VERSION = os.getenv("APP_VERSION", "3.0.0")
 
 # importing the routes
 from api.routes.LandingPage.landing_route import router as landing_router
+
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await connect_to_db()
+    yield
+    await database.disconnect()
 
 
 # Main Logic 
@@ -43,9 +53,24 @@ async def internal_exception_handler(request: Request, exc: Exception):
     return templates.TemplateResponse("error-500.html", {"request": request, "error": str(exc)}, status_code=500)
 
 
-# @app.get("/test-500")
-# async def test_500_error():
-#     1 / 0
+@app.get("/test-500")
+async def test_500_error():
+    1 / 0
+
+
+async def connect_to_db():
+    await database.connect()
+    if "sqlite" in DATABASE_URL:
+        await database.execute("PRAGMA foreign_keys = ON;")
+
+
+@app.on_event("startup")
+async def startup():
+    await database.connect()
+
+@app.on_event("shutdown")
+async def shutdown():
+    await database.disconnect()
 
 
 if __name__ == "__main__":

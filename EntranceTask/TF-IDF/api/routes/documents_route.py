@@ -1,27 +1,30 @@
 from fastapi import UploadFile, File, Request, Depends, Form, HTTPException, status
 from fastapi.responses import HTMLResponse, RedirectResponse
 from api.utils.router import router
+from typing import Optional
 from api.utils.templates import templates
+from api.utils.logger import logger
 from api.utils.links import baselink
 from api.auth.dependencies import get_current_user
-from api.crud.documents_crud import create_document, get_all_documents, get_document_by_id, delete_document
-from api.crud.statistics_crud import create_statistics, get_statistics_by_document_id, get_latest_statistics_by_document_id
+from api.crud.documents_crud import (
+    create_document, get_all_documents, get_document_by_id,
+    delete_document, update_document
+)
+from api.crud.statistics_crud import (
+    get_statistics_by_document_ids, get_statistics_by_document_id, create_statistics,
+    update_statistics, delete_statistics
+)
 from api.services.tf_idf_service import compute_tfidf_from_text
 from api.utils.links import doclink, baselink, UPLOAD_DIR
 from api.schemas.documents_schema import DocumentCreate
-from api.schemas.statistics_schema import StatisticsCreate
+from api.schemas.statistics_schema import StatisticsCreate, StatisticsUpdate
 import os
 from api.db import database, metrics_service
 import time
 import shutil
+import uuid
+import aiofiles
 
-@router.on_event("startup")
-async def startup():
-    await database.connect()
-
-@router.on_event("shutdown")
-async def shutdown():
-    await database.disconnect()
 
 UPLOAD_FOLDER = UPLOAD_DIR
 
@@ -47,40 +50,53 @@ async def get_upload_page(request: Request, user=Depends(get_current_user)):
 async def upload_document(
     request: Request,
     file: UploadFile = File(...),
+    filename: str = Form(...),
     user=Depends(get_current_user),
 ):
     start_time = time.time()
     try:
-        file_location = os.path.join(UPLOAD_FOLDER, file.filename)
+        user_folder = os.path.join(UPLOAD_FOLDER, str(user.id))
+        os.makedirs(user_folder, exist_ok=True)
 
-        with open(file_location, "wb") as f:
+        safe_filename = os.path.basename(file.filename)
+        unique_filename = f"a-a_{safe_filename}"
+        file_location = os.path.join(user_folder, unique_filename)
+
+        if filename == "":
+            filename = unique_filename
+        
+        # Async file save
+        async with aiofiles.open(file_location, 'wb') as out_file:
             content = await file.read()
-            f.write(content)
+            await out_file.write(content)
 
         text = content.decode("utf-8")
         tfidf_result = await compute_tfidf_from_text(text)
 
         processing_duration = round(time.time() - start_time, 3)
-          
+
         document_data = DocumentCreate(
-            filename=file.filename,
-            path=file_location,
+            filename=filename,
+            path=os.path.join(str(user.id), unique_filename),  # relative path
             user_id=user.id
         )
-        doc_data = await create_document(document_data)
+        
+        doc_data = await create_document(document_data) # getting the id of the created document
 
+        # creating the statistics for the document
         statistics_data = StatisticsCreate(
             document_id=doc_data["id"],
             tfidf_json=tfidf_result
         )
         await create_statistics(statistics_data)
 
+        # updating the metrics for the document
         await metrics_service.update_metrics(
             processing_duration=processing_duration,
             upload_size_bytes=len(content),
-            uploaded_filename=file.filename
+            uploaded_filename=unique_filename
         )
-        
+
         return RedirectResponse(
             url=f"{baselink}{doclink}/{doc_data['id']}",
             status_code=status.HTTP_303_SEE_OTHER,
@@ -90,17 +106,22 @@ async def upload_document(
         raise HTTPException(status_code=500, detail=f"Upload failed: {e}")
 
 
+
 @router.get(f"{baselink}{doclink}/{{document_id}}", response_class=HTMLResponse, name="document_detail")
 async def document_details(
     request: Request,
     document_id: int,
     user=Depends(get_current_user),
 ):
+    # Get the document
     document = await get_document_by_id(user.id, document_id)
     if not document:
         raise HTTPException(status_code=404, detail="Document not found")
 
-    statistics = await get_latest_statistics_by_document_id(document_id)
+    # Get the latest statistics object (includes ID and tfidf)
+    stat_obj = await get_statistics_by_document_id(document_id)
+    if not stat_obj:
+        raise HTTPException(status_code=404, detail="Statistics not found")
 
     return templates.TemplateResponse(
         "Dashboard/documents/document-details.html",
@@ -108,12 +129,13 @@ async def document_details(
             "request": request,
             "user_email": user.email,
             "document": document,
-            "statistics": statistics,
+            "statistics": stat_obj,
         },
     )
 
 
-# Optional: Add document edit page route
+
+# update page load
 @router.get(f"{baselink}{doclink}/{{document_id}}/edit", response_class=HTMLResponse, name="document_edit")
 async def document_edit_page(
     request: Request,
@@ -125,7 +147,7 @@ async def document_edit_page(
         raise HTTPException(status_code=404, detail="Document not found")
 
     return templates.TemplateResponse(
-        "Dashboard/documents/document-edit.html",
+        "Dashboard/documents/document-update.html",
         {
             "request": request,
             "user_email": user.email,
@@ -134,18 +156,157 @@ async def document_edit_page(
     )
 
 
-# Delete document
+# updating the new document
+@router.post(f"{baselink}{doclink}/{{document_id}}/edit", name="document_update")
+async def update_document_route(
+    request: Request,
+    document_id: int,
+    filename: str = Form(...),
+    file: Optional[UploadFile] = File(None),
+    user=Depends(get_current_user),
+):
+    existing_doc = await get_document_by_id(user.id, document_id)
+    if not existing_doc:
+        raise HTTPException(status_code=404, detail="Document not found")
+
+    new_filename = filename.strip()
+    update_data = None
+
+    if file:
+        start_time = time.time()
+
+        # Set up upload folder
+        user_folder = os.path.join(UPLOAD_DIR, str(user.id))
+        os.makedirs(user_folder, exist_ok=True)
+
+        # Delete the old file if it exists
+        old_file_path = os.path.join(UPLOAD_DIR, existing_doc.path)
+        if os.path.exists(old_file_path):
+            os.remove(old_file_path)
+
+        # Save new file
+        safe_filename = os.path.basename(file.filename)
+        if not safe_filename.startswith("a-a_"):
+            safe_filename = f"a-a_{safe_filename}"
+        new_file_path = os.path.join(user_folder, safe_filename)
+
+        async with aiofiles.open(new_file_path, "wb") as out_file:
+            content = await file.read()
+            await out_file.write(content)
+
+        relative_path = os.path.join(str(user.id), safe_filename)
+
+        # Prepare update for documents table
+        from api.schemas.documents_schema import DocumentUpdate
+        update_data = DocumentUpdate(
+            filename=new_filename or safe_filename,
+            path=relative_path
+        )
+
+        # Recompute TF-IDF
+        text = content.decode("utf-8")
+        tfidf_result = await compute_tfidf_from_text(text)
+
+        # Update statistics
+        from api.schemas.statistics_schema import StatisticsUpdate
+        stat_record = await get_statistics_by_document_id(document_id)
+        if not stat_record:
+            raise HTTPException(status_code=404, detail="Statistics not found")
+
+        statistics_data = StatisticsUpdate(tfidf_json=tfidf_result)
+        await update_statistics(document_id, statistics_data)
+
+        # Log updated metrics
+        processing_duration = round(time.time() - start_time, 3)
+        await metrics_service.update_metrics(
+            processing_duration=processing_duration,
+            upload_size_bytes=len(content),
+            uploaded_filename=safe_filename
+        )
+    else:
+        from api.schemas.documents_schema import DocumentUpdate
+        update_data = DocumentUpdate(
+            filename=new_filename or existing_doc.filename,
+            path=existing_doc.path
+        )
+
+    updated_doc = await update_document(user.id, document_id, update_data)
+    if not updated_doc:
+        raise HTTPException(status_code=400, detail="Document update failed")
+
+    return RedirectResponse(
+        url=f"{baselink}{doclink}/{document_id}",
+        status_code=status.HTTP_303_SEE_OTHER,
+    )
+
+
+
+
+# # deleting the document
+# @router.post(f"{baselink}{doclink}/{{document_id}}/delete", name="document_delete")
+# async def delete_document_route(
+#     request: Request,
+#     document_id: int,
+#     user=Depends(get_current_user),
+# ):
+#     result = await delete_document(user.id, document_id)
+
+#     if result == 1:
+#         # Delete statistics
+#         await delete_statistics(document_id)
+
+#         # Delete file from disk
+#         doc = await get_document_by_id(user.id, document_id)
+#         if doc:
+#             full_path = os.path.join(UPLOAD_DIR, doc.path)
+#             if os.path.exists(full_path) and os.path.isfile(full_path):
+#                 try:
+#                     os.remove(full_path)
+#                 except Exception as e:
+#                     print(f"Error deleting file: {e}")
+#                     logger.error(f"Error deleting file from disk: {e}")
+#             else:
+#                 print(f"File not found or not a valid file: {full_path}")
+#                 logger.warning(f"File not found or not a valid file: {full_path}")
+
+#         return RedirectResponse(
+#             url=f"{baselink}{doclink}", status_code=status.HTTP_303_SEE_OTHER
+#         )
+#     else:
+#         raise HTTPException(status_code=400, detail="Delete failed or not authorized")
+
+
 @router.post(f"{baselink}{doclink}/{{document_id}}/delete", name="document_delete")
 async def delete_document_route(
     request: Request,
     document_id: int,
     user=Depends(get_current_user),
 ):
-    result = await delete_document(user.id, document_id)
+    # Get the document first (before deleting it from DB)
+    doc = await get_document_by_id(user.id, document_id)
+    if not doc:
+        raise HTTPException(status_code=404, detail="Document not found")
 
+    # Try to delete from database
+    result = await delete_document(user.id, document_id)
     if result == 1:
+        # Delete statistics
+        await delete_statistics(document_id)
+
+        # Delete file from folder
+        full_path = os.path.join(UPLOAD_DIR, doc.path)
+        if os.path.exists(full_path) and os.path.isfile(full_path):
+            try:
+                os.remove(full_path)
+                logger.info(f"Deleted file from disk: {full_path}")
+            except Exception as e:
+                logger.error(f"Failed to delete file from disk: {e}")
+        else:
+            logger.warning(f"File does not exist or is not a file: {full_path}")
+
         return RedirectResponse(
             url=f"{baselink}{doclink}", status_code=status.HTTP_303_SEE_OTHER
         )
+
     else:
         raise HTTPException(status_code=400, detail="Delete failed or not authorized")

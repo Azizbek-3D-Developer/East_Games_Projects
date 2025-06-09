@@ -6,7 +6,7 @@ collections = Table(
     metadata,
     Column("id", Integer, primary_key=True),
     Column("name", String, nullable=False),
-    Column("user_id", Integer, ForeignKey("users.id"), nullable=False),
+    Column("user_id", Integer, ForeignKey("users.id",  ondelete="CASCADE"), nullable=False),
     Column("created_at", DateTime, default=func.now()) 
 )
 

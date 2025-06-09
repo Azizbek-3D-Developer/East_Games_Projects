@@ -1,0 +1,42 @@
+{% extends "Dashboard/dashboard.html" %}
+
+{% block title %}Upload Document{% endblock %}
+
+{% block secondary_stylesheets %}
+<link rel="stylesheet" href="{{ url_for('static', path='styles/Dashboard/Documents/documents-styles.css') }}" />
+{% endblock %}
+
+{% block data_container %}
+  <div class="a_a-documents-header">
+    <a href="/dashboard/documents" class="a_a-documents-btn">All Documents</a>
+    <a href="/dashboard/documents/create" class="a_a-documents-btn active">Upload New</a>
+  </div>
+
+  <div class="a_a-create-form">
+    <h2>Upload New Document</h2>
+    <form action="/dashboard/documents/{{ document.id }}/edit" method="post" enctype="multipart/form-data">
+      
+       <div class="form-group">
+            <label for="filename">Edit File Name:</label>
+            <input
+            type="text"
+            name="filename"
+            id="filename"
+            placeholder="e.g., report.txt"
+            maxlength="50"
+            value="{{ document.filename }}"
+            required
+            >
+        </div>
+            
+      
+      <div class="form-group">
+        <label for="file">Choose .txt File:</label>
+        <input type="file" name="file" id="file" accept=".txt">
+      </div>
+
+
+      <button type="submit" class="a_a-submit-btn">Upload</button>
+    </form>
+  </div>
+{% endblock %}

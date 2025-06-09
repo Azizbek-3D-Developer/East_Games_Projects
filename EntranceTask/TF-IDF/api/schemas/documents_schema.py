@@ -6,7 +6,7 @@ from datetime import datetime
 class DocumentBase(BaseModel):
     filename: str = Field(..., description="Original name of the uploaded file")
     path: str = Field(..., description="Server file path where the uploaded file is stored")
-    user_id: int = Field(..., description="ID of the user who uploaded the file", examples=1)
+    user_id: int = Field(..., description="ID of the user who uploaded the file", examples={"user_id": 1})
 
 
 class DocumentCreate(DocumentBase):
@@ -18,7 +18,6 @@ class DocumentUpdate(BaseModel):
     """Schema for updating an existing document"""
     filename: Optional[str] = Field(None, description="Updated file name")
     path: Optional[str] = Field(None, description="Updated file path")
-    user_id: Optional[int] = Field(None, description="Updated user ID (if changing ownership)", examples=1)
 
 
 class DocumentRead(DocumentBase):

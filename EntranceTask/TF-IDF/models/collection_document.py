@@ -4,8 +4,8 @@ from .user import metadata
 collection_documents = Table(
     "collection_documents",
     metadata,
-    Column("collection_id", Integer, ForeignKey("collections.id"), primary_key=True),
-    Column("document_id", Integer, ForeignKey("documents.id"), primary_key=True)
+    Column("collection_id", Integer, ForeignKey("collections.id",  ondelete="CASCADE"), primary_key=True),
+    Column("document_id", Integer, ForeignKey("documents.id",  ondelete="CASCADE"), primary_key=True)
 )
 
 

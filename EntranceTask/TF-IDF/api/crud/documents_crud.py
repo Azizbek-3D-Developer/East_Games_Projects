@@ -2,6 +2,7 @@ from api.schemas.documents_schema import DocumentCreate, DocumentRead, DocumentU
 from models.document import documents
 from api.db import database
 from datetime import datetime
+from api.utils.logger import logger
 
 
 # Create
@@ -17,6 +18,7 @@ async def create_document(document: DocumentCreate):
         return {"id": new_id, **document.dict()}
     except Exception as e:
         print(f"Document creation error: {e}")
+        logger.error(f"Document creation error: {e}")
         return None
 
 
@@ -28,6 +30,7 @@ async def get_all_documents(user_id: int) -> list[DocumentRead]:
         return [DocumentRead(**row) for row in rows]
     except Exception as e:
         print(f"Document fetch all error: {e}")
+        logger.error(f"Document fetch all error: {e}")
         return []
 
 
@@ -41,6 +44,7 @@ async def get_document_by_id(user_id: int, document_id: int) -> DocumentRead | N
         return DocumentRead(**row) if row else None
     except Exception as e:
         print(f"Document fetch by ID error: {e}")
+        logger.error(f"Document fetch by ID error: {e}")
         return None
 
 
@@ -58,6 +62,7 @@ async def delete_document(user_id: int, document_id: int) -> int:
         return 1
     except Exception as e:
         print(f"Document delete error: {e}")
+        logger.error(f"Document delete error: {e}")
         return 0
 
 
@@ -80,4 +85,5 @@ async def update_document(user_id: int, document_id: int, update: DocumentUpdate
         return await get_document_by_id(user_id, document_id)
     except Exception as e:
         print(f"Document update error: {e}")
+        logger.error(f"Document update error: {e}")
         return None

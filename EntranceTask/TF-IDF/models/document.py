@@ -7,7 +7,7 @@ documents = Table(
     Column("id", Integer, primary_key=True),
     Column("filename", String, nullable=False),
     Column("path", String, nullable=False),
-    Column("user_id", Integer, ForeignKey("users.id"), nullable=False),
+    Column("user_id", Integer, ForeignKey("users.id",  ondelete="CASCADE"), nullable=False),
     Column("uploaded_at", DateTime, default=func.now())
 )
 

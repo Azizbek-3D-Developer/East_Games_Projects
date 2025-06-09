@@ -5,7 +5,7 @@ statistics = Table(
     "statistics",
     metadata,
     Column("id", Integer, primary_key=True),
-    Column("document_id", Integer, ForeignKey("documents.id"), nullable=False),
+    Column("document_id", Integer, ForeignKey("documents.id", ondelete="CASCADE"), nullable=False),
     Column("tfidf_json", JSON),
     Column("created_at", DateTime, default=func.now()) 
 )

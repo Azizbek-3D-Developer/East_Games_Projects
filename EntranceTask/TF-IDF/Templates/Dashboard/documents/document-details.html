@@ -11,7 +11,7 @@
     <h1>Document Details</h1>
 
     <section class="document-info">
-      <h2>{{ document.filename }}</h2>
+      <h2>{{ document.display_name or document.filename }}</h2>
       <p><strong>Uploaded at:</strong> {{ document.uploaded_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
     </section>
 
