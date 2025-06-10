@@ -1,11 +1,8 @@
 import os
 from databases import Database
 from sqlalchemy import create_engine, MetaData
-from dotenv import load_dotenv
+from api.utils.dotenv_load import env_loader
 from api.services.metric_service import MetricsService
-
-
-load_dotenv()
 
 # DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./tfidf.db")
 DATABASE_URL = os.getenv("DATABASE_URL")

@@ -25,6 +25,7 @@ Stores metadata for uploaded text files.
 |------------|----------|------------------------------------|
 | id         | Integer  | Primary key                        |
 | filename   | String   | Original name of uploaded file     |
+| filecontent| String   | Original string of uploaded file   |
 | path       | String   | File storage path on server        |
 | user_id    | Integer  | FK to Users.id                     |
 | uploaded_at| DateTime | Upload timestamp                   |

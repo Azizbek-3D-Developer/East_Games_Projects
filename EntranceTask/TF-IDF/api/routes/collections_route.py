@@ -7,8 +7,8 @@ from api.schemas.collection_schema import CreateCollection, CollectionRead, Upda
 from api.utils.links import baselink, col_link
 from api.auth.dependencies import get_current_user
 from api.crud.collection_crud import get_all_collection, create_new_collection, get_collection_by_id, delete_collection_by_id, update_collection_by_id
-
-
+from api.crud.documents_crud import get_document_by_id, get_all_documents
+from api.crud.collection_document_crud import get_documents_by_collection
 
 
 # Get All
@@ -76,6 +76,22 @@ async def get_details_page(
     user_id = user.id
     collection_item = await get_collection_by_id(user_id, collection_id)
     if not collection_item:
+        raise HTTPException(status_code=400, detail="Collection item not found")
+    
+    related_documents_ids = await get_documents_by_collection(collection_item.id)
+    
+    collection_documents = []
+    for doc_id in related_documents_ids:
+        doc = await get_document_by_id(user.id, doc_id.document_id)
+
+        if doc:
+            collection_documents.append(doc)
+    
+    documents_list = await get_all_documents(user.id)
+    if not documents_list:
+        documents_list = []
+        
+    if not collection_item:
         raise HTTPException(status_code=400, detail="Collection finding failed")
     return templates.TemplateResponse(
         "Dashboard/Collections/collection-details.html",
@@ -85,6 +101,8 @@ async def get_details_page(
             "collection_item": collection_item,
             "owner_name": user.username,
             "collection_id" : collection_item.id,
+            "documents": collection_documents,
+            "all_documents": documents_list
         },
     )
  

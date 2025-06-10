@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Status{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ url_for('static', path='styles/LandingPage/status-page.css') }}" />
+{% endblock %}
+
+{% block content %}
+
+    <div class="a_a-success-message">Project version : {{ app_version }} </div>
+
+{% endblock %}

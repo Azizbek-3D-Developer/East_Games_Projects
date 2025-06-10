@@ -10,6 +10,7 @@ async def create_document(document: DocumentCreate):
     query = documents.insert().values(
         filename=document.filename,
         path=document.path,
+        filecontent = document.filecontent,
         user_id=document.user_id,
         uploaded_at=datetime.now()
     )

@@ -9,18 +9,14 @@ from dotenv import load_dotenv
 from api.routes import api_router
 from api.db import DATABASE_URL
 from contextlib import asynccontextmanager
+from api.utils.dotenv_load import env_loader
 
 
-load_dotenv()
 # Read config from environment variables
 APP_PORT = int(os.getenv("APP_PORT", 6000))
 UPLOAD_DIR = os.getenv("UPLOAD_DIR", "uploads")
 TOP_K_WORDS = int(os.getenv("TOP_K_WORDS", 50))
 APP_VERSION = os.getenv("APP_VERSION", "3.0.0")
-
-# importing the routes
-from api.routes.LandingPage.landing_route import router as landing_router
-
 
 
 @asynccontextmanager
@@ -61,16 +57,16 @@ async def test_500_error():
 async def connect_to_db():
     await database.connect()
     if "sqlite" in DATABASE_URL:
-        await database.execute("PRAGMA foreign_keys = ON;")
+        await database.execute("PRAGMA foreign_keys = ON;").close()
 
 
-@app.on_event("startup")
-async def startup():
-    await database.connect()
+# @app.on_event("startup")
+# async def startup():
+#     await database.connect()
 
-@app.on_event("shutdown")
-async def shutdown():
-    await database.disconnect()
+# @app.on_event("shutdown")
+# async def shutdown():
+#     await database.disconnect()
 
 
 if __name__ == "__main__":

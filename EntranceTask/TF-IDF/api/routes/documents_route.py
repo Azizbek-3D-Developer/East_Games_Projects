@@ -24,11 +24,16 @@ import time
 import shutil
 import uuid
 import aiofiles
-
+from api.crud.collection_document_crud import (
+    get_collections_by_document, get_collection_document
+)
+from api.crud.collection_crud import (
+    get_collection_by_id, get_all_collection
+)
 
 UPLOAD_FOLDER = UPLOAD_DIR
 
-
+# Documents get all page
 @router.get(f"{baselink}{doclink}", response_class=HTMLResponse)
 async def list_documents(request: Request, user=Depends(get_current_user)):
     documents = await get_all_documents(user.id)
@@ -38,6 +43,7 @@ async def list_documents(request: Request, user=Depends(get_current_user)):
     )
 
 
+# Documents Create page loading
 @router.get(f"{baselink}{doclink}/create", response_class=HTMLResponse, name="document_create_form")
 async def get_upload_page(request: Request, user=Depends(get_current_user)):
     return templates.TemplateResponse(
@@ -46,6 +52,7 @@ async def get_upload_page(request: Request, user=Depends(get_current_user)):
     )
 
 
+# Documents create logic handling
 @router.post(f"{baselink}{doclink}/create", name="document_create")
 async def upload_document(
     request: Request,
@@ -78,7 +85,8 @@ async def upload_document(
         document_data = DocumentCreate(
             filename=filename,
             path=os.path.join(str(user.id), unique_filename),  # relative path
-            user_id=user.id
+            user_id=user.id,
+            filecontent=text
         )
         
         doc_data = await create_document(document_data) # getting the id of the created document
@@ -106,7 +114,7 @@ async def upload_document(
         raise HTTPException(status_code=500, detail=f"Upload failed: {e}")
 
 
-
+# details page
 @router.get(f"{baselink}{doclink}/{{document_id}}", response_class=HTMLResponse, name="document_detail")
 async def document_details(
     request: Request,
@@ -118,6 +126,26 @@ async def document_details(
     if not document:
         raise HTTPException(status_code=404, detail="Document not found")
 
+    # Getting related collections id for this document
+    document_collections_ids = await get_collections_by_document(document_id)
+    
+    # assigning collections into list
+    collections_list = []
+    for col_id in document_collections_ids:
+        # getting each collection item from db
+        collection_item = await get_collection_by_id(user.id, col_id.collection_id)
+
+        # adding into final list
+        if collection_item:
+            collections_list.append(collection_item)
+    
+    # Getting the list of all collections for this user
+    all_collections = await get_all_collection(user.id)
+    if not all_collections:
+        # raise HTTPException(status_code=400, detail= "Could not get all collections for documents")
+        all_collections = []
+    
+    
     # Get the latest statistics object (includes ID and tfidf)
     stat_obj = await get_statistics_by_document_id(document_id)
     if not stat_obj:
@@ -130,6 +158,8 @@ async def document_details(
             "user_email": user.email,
             "document": document,
             "statistics": stat_obj,
+            "collections": collections_list,
+            "all_collections": all_collections
         },
     )
 
@@ -197,15 +227,18 @@ async def update_document_route(
         relative_path = os.path.join(str(user.id), safe_filename)
 
         # Prepare update for documents table
-        from api.schemas.documents_schema import DocumentUpdate
-        update_data = DocumentUpdate(
-            filename=new_filename or safe_filename,
-            path=relative_path
-        )
+        
 
         # Recompute TF-IDF
         text = content.decode("utf-8")
         tfidf_result = await compute_tfidf_from_text(text)
+        
+        from api.schemas.documents_schema import DocumentUpdate
+        update_data = DocumentUpdate(
+            filename=new_filename or safe_filename,
+            path=relative_path,
+            filecontent = text
+        )
 
         # Update statistics
         from api.schemas.statistics_schema import StatisticsUpdate
@@ -227,7 +260,8 @@ async def update_document_route(
         from api.schemas.documents_schema import DocumentUpdate
         update_data = DocumentUpdate(
             filename=new_filename or existing_doc.filename,
-            path=existing_doc.path
+            path=existing_doc.path,
+            filecontent= existing_doc.filecontent            
         )
 
     updated_doc = await update_document(user.id, document_id, update_data)
