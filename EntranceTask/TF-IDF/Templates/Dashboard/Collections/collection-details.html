@@ -1,74 +1,78 @@
 {% extends "Dashboard/dashboard.html" %}
 
-{% block title %}Collection-Details{% endblock %}
+{% block title %}Collection Details{% endblock %}
 
 {% block secondary_stylesheets %}
-    <link rel="stylesheet" href="{{ url_for('static', path='styles/Dashboard/Collections/collections-styles.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', path='styles/Dashboard/Collections/collections-details-styles.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', path='styles/Dashboard/Collections/collections-details-mobile-styles.css') }}" />
 {% endblock %}
 
 {% block data_container %}
-    <div class="a_a-collections-header">
-        <a href="/dashboard/collections" class="a_a-collections-btn active">All Collections</a>
-        <a href="/dashboard/collections/create" class="a_a-collections-btn">Create New Collection</a>
-        <a href="/dashboard/collections/{{ collection_id }}/statistics" class="a_a-collections-btn active">Collection statistics</a>
-    </div>
+<div class="collection-details-container">
+  <h1>Collection Details</h1>
 
-    <div class="a_a-collections-details">
-    <h2 class="a_a-collections-details-title">Collection Details</h2>
-
-    <div class="a_a-collections-info">
-        <p><strong>Collection Name:</strong> {{ collection_item.name }}</p>
-        <p><strong>Owner:</strong> {{ owner_name }}</p>
-    </div>
-
+  <section class="collection-info">
+    <h2>{{ collection_item.name }}</h2>
+    <p><strong>Owner:</strong> {{ owner_name }}</p>
     <div class="a_a-collections-actions">
-        <a href="/dashboard/collections" class="a_a-card-btn bakc-btn">go back</a>
-        <a href="/dashboard/collections/{{ collection_item.id }}/edit" class="a_a-card-btn">Edit</a>
-        <form action="/dashboard/collections/{{ collection_item.id }}/delete" method="post" class="a_a-delete-form">
-            <button type="submit" class="a_a-card-btn danger">Delete</button>
-        </form>
+      <a href="/dashboard/collections" class="a_a-card-btn">← Back</a>
+      <a href="/dashboard/collections/{{ collection_item.id }}/edit" class="a_a-card-btn">Edit</a>
+      <form action="/dashboard/collections/{{ collection_item.id }}/delete" method="post" class="a_a-delete-form">
+        <button type="submit" class="a_a-card-btn danger">Delete</button>
+      </form>
     </div>
-    </div>
+  </section>
 
-        <div class="a_a-collections-documents">
-        <h3 class="a_a-collections-documents-title">Documents in this Collection</h3>
-
-        {% if documents %}
-            <div class="a_a-documents-list">
-                {% for doc in documents %}
-                    <div class="a_a-document-card">
-                        <p class="a_a-document-name"><strong>Name:</strong> {{ doc.filename }}</p>
-                        <p class="a_a-document-uploaded"><strong>Uploaded At:</strong> {{ doc.uploaded_at.strftime("%Y-%m-%d %H:%M:%S") }}</p>
-
-                        <div class="a_a-document-actions">
-                            <a href="/dashboard/documents/{{ doc.id }}" class="a_a-card-btn">View Details</a>
-                            
-                            <form action="/collections/details/{{ collection_item.id }}/{{ doc.id }}/delete" method="post" onsubmit="return confirm('Are you sure you want to delete this document from collection?');">
-                                <button type="submit" class="a_a-card-btn danger">Delete</button>
-                            </form>
-                        </div>
-                    </div>
-                {% endfor %}
+  <section class="collapsible-section">
+    <button type="button" class="collapsible-toggle">Documents in this Collection ▾</button>
+    <div class="collapsible-content">
+      {% if documents %}
+        <div class="a_a-documents-list">
+          {% for doc in documents %}
+            <div class="a_a-document-card">
+              <p class="a_a-document-name"><strong>Name:</strong> {{ doc.filename }}</p>
+              <p class="a_a-document-uploaded"><strong>Uploaded At:</strong> {{ doc.uploaded_at.strftime("%Y-%m-%d %H:%M:%S") }}</p>
+              <div class="a_a-document-actions">
+                <a href="/dashboard/documents/{{ doc.id }}" class="a_a-card-btn">View Details</a>
+                <form action="/collections/details/{{ collection_item.id }}/{{ doc.id }}/delete" method="post" onsubmit="return confirm('Are you sure you want to delete this document from collection?');">
+                  <button type="submit" class="a_a-card-btn danger">Delete</button>
+                </form>
+              </div>
             </div>
-        {% else %}
-            <p class="a_a-no-documents">No documents in this collection yet.</p>
-        {% endif %}
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="a_a-no-documents">No documents in this collection yet.</p>
+      {% endif %}
     </div>
-    <div class="a_a-add-documents-form">
-        <h3>Add Documents to This Collection</h3>
-        <form action="/collections/details/{{collection_item.id}}/create" method="post">
-            {% for doc in all_documents %}
-                <div>
-                    <label>
-                        <input type="checkbox" name="document_ids" value="{{ doc.id }}">
-                        {{ doc.filename }} ({{ doc.uploaded_at.strftime('%Y-%m-%d') }})
-                    </label>
-                </div>
-            {% endfor %}
-            <button type="submit" class="a_a-card-btn">Add to Collection</button>
-        </form>
+  </section>
+
+  <section class="collapsible-section">
+    <button type="button" class="collapsible-toggle">Add Documents to This Collection ▾</button>
+    <div class="collapsible-content">
+      <form action="/collections/details/{{ collection_item.id }}/create" method="post" class="a_a-add-documents-form">
+        <fieldset>
+          {% for doc in all_documents %}
+            <div class="checkbox-group">
+              <label>
+                <input type="checkbox" name="document_ids" value="{{ doc.id }}">
+                {{ doc.filename }} ({{ doc.uploaded_at.strftime('%Y-%m-%d') }})
+              </label>
+            </div>
+          {% endfor %}
+        </fieldset>
+        <button type="submit" class="a_a-card-btn">Add to Collection</button>
+      </form>
     </div>
+  </section>
+  <br>
+  <br>
+  <section class="collapsible-section">
+    <a href="/dashboard/collections/{{ collection_item.id }}/statistics" class="a_a-card-btn">View TF-IDF Statistics</a>
+  </section>
+</div>
+{% endblock %}
 
-
-
+{% block scripts %}
+  <script src="{{ url_for('static', path='scripts/collection-details-script.js') }}"></script>
 {% endblock %}

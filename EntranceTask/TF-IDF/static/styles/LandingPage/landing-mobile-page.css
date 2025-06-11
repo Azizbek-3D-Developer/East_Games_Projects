@@ -1,0 +1,34 @@
+/* landing-mobile-page.css */
+
+@media (max-width: 768px) {
+  .a_a-landing-section {
+    padding: 2rem 1rem;
+    min-height: 59vh;
+  }
+
+  .a_a-landing-title {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .a_a-landing-nav {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .a_a-link {
+    width: 80%;
+    padding: 0.9rem 1.2rem;
+    font-size: 1.1rem;
+  }
+
+  .a_a-success-message {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+  }
+
+  .a_a-main-content {
+    background-color: #121212;
+    min-height: calc(80vh - 165px); /* Adjusting for nav+footer */
+}
+}

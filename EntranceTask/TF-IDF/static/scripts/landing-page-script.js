@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         messageBox.remove();
       }, 500);
-    }, 10000); // 10 seconds
+    }, 5000); // 5 seconds
   }
 });
 
@@ -30,6 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         }, 1000);
       });
-    }, 10000); 
+    }, 5000); 
   }
 });

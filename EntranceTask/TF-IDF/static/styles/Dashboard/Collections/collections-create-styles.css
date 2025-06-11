@@ -1,0 +1,119 @@
+/* collections-create-styles.css */
+
+body {
+  background-color: #121212;
+  color: #E0E0E0;
+  font-family: Arial, sans-serif;
+}
+
+.a_a-collections-header {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.a_a-collections-btn {
+  background-color: #BB86FC;
+  border: none;
+  color: #121212;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 0 10px #BB86FC;
+  transition: all 0.3s ease;
+}
+
+.a_a-collections-btn:hover,
+.a_a-collections-btn.active {
+  background-color: #3700B3;
+  color: #E0E0E0;
+  box-shadow: 0 0 15px #3700B3;
+}
+
+.a_a-collections-create,
+.a_a-collections-list {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.a_a-collection-form {
+  background-color: #1F1B24;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 0 10px rgba(187, 134, 252, 0.3);
+  border: 1px solid #BB86FC;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  color: #E0E0E0;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+input[type="text"] {
+  background-color: #121212;
+  border: 1px solid #BB86FC;
+  padding: 0.75rem;
+  color: #E0E0E0;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #3700B3;
+  box-shadow: 0 0 8px #3700B3;
+}
+
+small {
+  color: #B0B0B0;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.a_a-submit-btn {
+  background-color: #BB86FC;
+  color: #121212;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0 0 10px #BB86FC;
+  transition: all 0.3s ease;
+}
+
+.a_a-submit-btn:hover {
+  background-color: #3700B3;
+  color: #E0E0E0;
+  box-shadow: 0 0 15px #3700B3;
+}
+
+@media (max-width: 600px) {
+  .a_a-collection-form {
+    padding: 1.25rem;
+    width: 90%;
+  }
+
+  .a_a-collections-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .a_a-collections-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

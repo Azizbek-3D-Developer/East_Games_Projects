@@ -1,90 +1,160 @@
-/* Container styling */
+/* documents-details-styles.css */
+
+body {
+  background-color: #121212;
+  color: #E0E0E0;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
 .document-details-container {
   padding: 2rem;
   max-width: 1000px;
-  margin: 0 auto;
-  background-color: #1e1e1e;
-  border-radius: 12px;
-  box-shadow: 0 0 12px rgba(187, 134, 252, 0.1);
+  margin: auto;
 }
 
-/* Section headers */
-.document-details-container h1,
-.document-details-container h2,
-.document-details-container h3 {
-  color: var(--accent);
+h1, h2, h3 {
+  color: #BB86FC;
+}
+
+/* Collapsible Containers */
+.collapsible-section {
+  margin-top: 2rem;
+  border: 1px solid #BB86FC;
+  border-radius: 8px;
+  background-color: #1F1B24;
+}
+
+.collapsible-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+  background-color: #1F1B24;
+  border-bottom: 1px solid #3700B3;
+}
+
+.collapsible-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #E0E0E0;
+}
+
+.toggle-icon {
+  font-size: 1.5rem;
+  color: #BB86FC;
+  transition: transform 0.3s ease;
+}
+
+.collapsible-content {
+  display: none;
+  padding: 1rem;
+  background-color: #121212;
+  color: #E0E0E0;
+}
+
+.collapsible-content.open {
+  display: block;
+}
+
+/* Card and Button Styles */
+.a_a-document-card {
+  background-color: #1F1B24;
+  border: 1px solid #BB86FC;
+  border-radius: 8px;
+  padding: 1rem;
   margin-bottom: 1rem;
 }
 
-/* Document info section */
-.document-info {
-  margin-bottom: 2rem;
+.a_a-card-btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #BB86FC;
+  color: #121212;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #BB86FC;
+  margin-right: 0.5rem;
 }
 
-/* Table wrapper (optional if you want horizontal scroll on small screens) */
-.tfidf-stats {
-  overflow-x: auto;
+.a_a-card-btn:hover {
+  background-color: #3700B3;
+  color: #E0E0E0;
+  box-shadow: 0 0 15px #BB86FC;
 }
 
-/* TF-IDF Table styles */
+.a_a-card-btn.danger {
+  background-color: #B00020;
+  color: #E0E0E0;
+  box-shadow: 0 0 10px #B00020;
+}
+
+.a_a-card-btn.danger:hover {
+  background-color: #790000;
+  box-shadow: 0 0 15px #B00020;
+}
+
+/* TF-IDF Table */
 .tfidf-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 600px;
-  background-color: #2a2a2a;
-  border-radius: 8px;
-  overflow: hidden;
+  margin-top: 1rem;
+  background-color: #1F1B24;
 }
 
 .tfidf-table th,
 .tfidf-table td {
-  padding: 0.75rem 1rem;
+  border: 1px solid #3700B3;
+  padding: 0.5rem;
   text-align: left;
-  border-bottom: 1px solid #444;
-  color: var(--primary-text);
+  color: #E0E0E0;
 }
 
 .tfidf-table th {
-  background-color: var(--accent);
-  color: #121212;
-  text-transform: uppercase;
-  font-weight: 600;
-  font-size: 0.85rem;
+  background-color: #3700B3;
 }
 
-.tfidf-table tbody tr:hover {
-  background-color: #373737;
-  transition: background-color 0.3s ease;
+/* Add to Collection Form */
+.a_a-add-documents-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-/* Back link styling */
-.tfidf-stats a {
+.a_a-add-documents-form label {
+  color: #B0B0B0;
+}
+
+.a_a-add-documents-form input[type="checkbox"] {
+  accent-color: #BB86FC;
+  transform: scale(1.2);
+}
+
+.a_a-no-documents {
+  color: #B0B0B0;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+
+.collapsible-toggle{
   display: inline-block;
-  margin-top: 1.5rem;
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.tfidf-stats a:hover {
-  color: white;
-}
-.tfidf-table {
   width: 100%;
-  border-collapse: separate;     /* Allows spacing between rows */
-  border-spacing: 0 12px;        /* Adds vertical space between rows */
-  min-width: 600px;
-  background-color: transparent; /* Needed to avoid color leaks between gaps */
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.tfidf-table th,
-.tfidf-table td {
-  padding: 1rem 1.2rem;           /* Increased padding for taller rows */
-  text-align: left;
-  background-color: #2a2a2a;      /* Apply background to each cell to preserve look */
-  border-bottom: none;
-  color: var(--primary-text);
-  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  background-color: #BB86FC;
+  color: #121212;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #BB86FC;
+  margin-right: 0.5rem;
 }

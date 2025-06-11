@@ -5,6 +5,7 @@
 {% block stylesheets %}
   {{ super() }}
   <link rel="stylesheet" href="{{ url_for('static', path='styles/Dashboard/dashboard-styles.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', path='styles/Dashboard/dashboard-mobile-styles.css') }}" />
   {% block secondary_stylesheets %}{% endblock %}
 {% endblock %}
 

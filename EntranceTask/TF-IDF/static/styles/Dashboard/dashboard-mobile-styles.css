@@ -1,0 +1,58 @@
+@media (max-width: 1024px) {
+  .a_a-dashboard-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .a_a-sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 15px 10px;
+    max-width: 100%;
+    box-shadow: none;
+  }
+
+  .a_a-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .a_a-btn {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  .a_a-logout-form {
+    width: 100%;
+    margin: 0;
+    padding: 10px 20px;
+    text-align: center;
+  }
+
+  .a_a-logout-btn {
+    width: auto;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+
+  .a_a-main-content {
+    padding: 10px;
+    height: auto;
+  }
+
+  .a_a-data-display {
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+  .a_a-update-success-message {
+    width: 90%;
+    font-size: 0.95rem;
+  }
+}

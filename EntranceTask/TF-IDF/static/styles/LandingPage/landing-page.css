@@ -1,150 +1,79 @@
 /* landing-page.css */
 
-/* Container & layout */
 .a_a-landing-section {
-  min-height: 80vh;
   display: flex;
+  height: calc(90vh - 165px);
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  padding: 3rem 1.5rem;
   background-color: #121212;
   color: #E0E0E0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  overflow: hidden;
-  position: relative;
+  padding: 8rem auto;
+  text-align: center;
 }
 
-/* Animated gradient background blob */
-.a_a-landing-section::before {
-  content: "";
-  position: absolute;
-  top: -30%;
-  left: -30%;
-  width: 150%;
-  height: 150%;
-  background: linear-gradient(270deg, #BB86FC, #3700B3, #BB86FC);
-  background-size: 600% 600%;
-  filter: blur(100px);
-  opacity: 0.3;
-  animation: gradientShift 15s ease infinite;
-  z-index: 0;
-}
-
-/* Title */
 .a_a-landing-title {
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
+  font-size: 3rem;
+  margin-bottom: 2rem;
   color: #BB86FC;
   text-shadow: 0 0 15px #BB86FC;
-  position: relative;
-  z-index: 1;
-  animation: fadeInUp 1.2s ease forwards;
-  opacity: 0;
-  transform: translateY(20px);
 }
 
-/* Nav Links */
 .a_a-landing-nav {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
-  position: relative;
-  z-index: 1;
-  animation: fadeInUp 1.5s ease forwards;
-  opacity: 0;
-  transform: translateY(20px);
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .a_a-link {
-  color: #BB86FC;
+  padding: 1rem 2.2rem;
+  border-radius: 40px;
+  background: linear-gradient(135deg, #BB86FC, #3700B3, #BB86FC);
+  background-size: 400% 400%;
+  color: #121212;
+  font-weight: bold;
+  font-size: 1.2rem;
   text-decoration: none;
-  margin: 0 1rem;
-  font-weight: 700;
-  padding: 0.5rem 1rem;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 8px transparent;
-  display: inline-block;
+  box-shadow: 0 0 12px #BB86FC;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  animation: glowingGradient 5s ease infinite;
 }
 
 .a_a-link:hover,
 .a_a-link:focus {
-  color: #3700B3;
-  border-color: #3700B3;
-  box-shadow: 0 0 15px #3700B3;
-  outline: none;
-  transform: scale(1.05);
+  background: #3700B3;
+  color: #FFFFFF;
+  transform: scale(1.08);
+  box-shadow: 0 0 25px #BB86FC;
 }
 
-/* Success message */
+/* Success message box */
 .a_a-success-message {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   padding: 1rem 2rem;
+  background-color: #2e7d32;
+  color: #ffffff;
   border-radius: 12px;
-  background-color: #2E7D32;
-  color: #C8E6C9;
-  box-shadow: 0 0 12px #4CAF50;
-  font-weight: 700;
-  max-width: 420px;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  z-index: 1;
-  animation: fadeIn 1.8s ease forwards;
-  opacity: 0;
+  box-shadow: 0 0 15px #4caf50;
+  animation: glowSuccess 2s ease-in-out infinite alternate;
+  font-weight: bold;
 }
 
 /* Animations */
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+@keyframes glowingGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes glowSuccess {
+  from { box-shadow: 0 0 10px #4caf50; }
+  to { box-shadow: 0 0 25px #66bb6a; }
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
 
-/* Responsive typography */
-@media (max-width: 768px) {
-  .a_a-landing-title {
-    font-size: 2.8rem;
+.a_a-main-content {
+    background-color: #121212;
+    min-height: calc(100vh - 165px); /* Adjusting for nav+footer */
   }
-  .a_a-landing-nav {
-    font-size: 1.2rem;
-  }
-  .a_a-link {
-    margin: 0 0.5rem;
-    padding: 0.4rem 0.8rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .a_a-landing-title {
-    font-size: 2.2rem;
-  }
-  .a_a-landing-nav {
-    font-size: 1rem;
-  }
-  .a_a-link {
-    margin: 0 0.3rem;
-    padding: 0.3rem 0.6rem;
-  }
-}

@@ -1,5 +1,6 @@
+/* Base container */
 .a_a-settings-container {
-  max-width: 420px;       /* limit width to a nice card size */
+  max-width: 420px;
   margin: 5rem auto;
   background: #222026;
   padding: 2.5rem 3rem;
@@ -10,16 +11,22 @@
   text-align: center;
 }
 
+/* Title */
 .a_a-settings-title {
   font-size: 2.25rem;
   font-weight: 700;
   color: #7052FF;
   margin-bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
   letter-spacing: 1.2px;
   text-shadow: 0 0 7px #7052FFCC;
-  text-align: center;
+  border: #E0E0E0 2px solid;
+  padding: 10px;
+
 }
 
+/* Form layout */
 .a_a-settings-form {
   display: flex;
   flex-direction: column;
@@ -27,16 +34,17 @@
   text-align: left;
 }
 
+/* Labels */
 .a_a-label {
-  display: block;
   margin-bottom: 0.5rem;
   font-weight: 600;
   color: #A0A0A0;
   user-select: none;
 }
 
+/* Inputs */
 .a_a-input {
-  width: 100%;
+  width: 92%;
   padding: 0.6rem 1rem;
   border-radius: 7px;
   border: 2px solid #4a4560;
@@ -56,6 +64,7 @@
   outline: none;
 }
 
+/* Primary button */
 .a_a-btn-login {
   margin-top: 1.4rem;
   background: #7052FF;
@@ -71,7 +80,7 @@
   user-select: none;
   position: relative;
   overflow: hidden;
-  width: 100%; /* Make button full width for consistency */
+  width: 100%;
 }
 
 .a_a-btn-login::before {
@@ -80,12 +89,7 @@
   top: 0; left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
   transition: left 0.5s ease;
   pointer-events: none;
 }
@@ -102,21 +106,21 @@
   outline: none;
 }
 
-/* Delete button overrides */
+/* Delete button styling */
 .a_a-delete-btn {
   background: #B00020 !important;
   box-shadow: 0 5px 14px rgba(176, 0, 32, 0.7) !important;
-  width: 100%; /* full width */
+  width: 100%;
 }
 
-/* Horizontal line */
+/* Horizontal divider */
 .a_a-hr {
   margin: 2rem 0;
   border: 0;
   border-top: 1px solid #4a4560;
 }
 
-/* Go back link styled as button */
+/* Back link */
 .a_a-btn {
   background: #7052FF;
   color: #EEE;
@@ -127,16 +131,53 @@
   display: inline-block;
   transition: background-color 0.3s ease;
   margin-top: 1.5rem;
+  width: 90%;
 }
 
 .a_a-btn:hover {
   background-color: #5b45d6;
 }
 
-/* Responsive */
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .a_a-settings-container {
+    margin: 3rem 1rem;
+    padding: 2rem 1.5rem;
+    width: auto;
+  }
+
+  .a_a-settings-title {
+    font-size: 1.8rem;
+  }
+
+  .a_a-btn-login {
+    font-size: 1rem;
+  }
+
+  .a_a-input {
+    font-size: 0.95rem;
+    width: 90%;
+  }
+}
+
 @media (max-width: 480px) {
   .a_a-settings-container {
-    margin: 2.5rem 1rem;
-    padding: 2rem 1.5rem;
+    margin: 2rem 1rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .a_a-settings-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .a_a-btn {
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .a_a-input {
+    padding: 0.5rem 0.8rem;
+    width: 90%;
   }
 }

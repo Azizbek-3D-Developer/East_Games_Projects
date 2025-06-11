@@ -1,109 +1,112 @@
-/* register-styles.css */
-
+/* Core container styling */
 .a_a-register-section {
-  max-width: 420px;
-  margin: 4rem auto;
-  background: #1F1B24;
-  padding: 2.5rem 3rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(187, 134, 252, 0.3);
+  max-width: 480px;
+  margin: 5vh auto;
+  background: linear-gradient(135deg, #1F1B24, #29243a);
+  padding: 3rem 3rem;
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(187, 134, 252, 0.4);
   color: #E0E0E0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
+/* Form Title */
 .a_a-register-title {
-  margin-bottom: 1.5rem;
-  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  font-size: 2.4rem;
   font-weight: 700;
   color: #BB86FC;
   letter-spacing: 1px;
-  text-shadow: 0 0 8px #BB86FCAA;
+  text-shadow: 0 0 12px #BB86FC99;
 }
 
+/* Form layout */
 .a_a-register-form {
   display: flex;
   flex-direction: column;
-  gap: 1.3rem;
+  gap: 1.5rem;
 }
 
+/* Input Groups */
 .a_a-form-group {
   text-align: left;
 }
 
+/* Labels */
 .a_a-form-label {
   display: block;
   margin-bottom: 0.4rem;
   font-weight: 600;
-  color: #B0B0B0;
-  user-select: none;
+  color: #C2C2C2;
 }
 
+/* Inputs */
 .a_a-form-input {
-  width: 100%;
-  padding: 0.6rem 0.8rem;
-  border-radius: 8px;
-  border: 2px solid #3a3743;
-  background-color: #2A2634;
-  color: #E0E0E0;
+  width: 92%;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 2px solid #4e4564;
+  background-color: #2E2B38;
+  color: #F0F0F0;
   font-size: 1rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .a_a-form-input:focus {
   border-color: #BB86FC;
-  box-shadow: 0 0 8px #BB86FCAA;
+  box-shadow: 0 0 10px #BB86FCBB;
   outline: none;
 }
 
+/* Register Button */
 .a_a-btn-primary {
   margin-top: 1rem;
-  background: linear-gradient(45deg, #BB86FC, #8B45F8);
-  color: #121212;
+  background: linear-gradient(135deg, #BB86FC, #8B45F8);
+  color: #1E1E1E;
   font-weight: 700;
   font-size: 1.15rem;
-  padding: 0.75rem 0;
+  padding: 0.8rem;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
-  box-shadow: 0 6px 12px rgba(187, 134, 252, 0.6);
+  box-shadow: 0 6px 16px rgba(187, 134, 252, 0.5);
   transition: all 0.4s ease;
-  user-select: none;
 }
 
 .a_a-btn-primary:hover,
 .a_a-btn-primary:focus {
-  background: linear-gradient(45deg, #8B45F8, #BB86FC);
-  box-shadow: 0 8px 20px rgba(139, 69, 248, 0.8);
-  transform: translateY(-3px) scale(1.03);
+  background: linear-gradient(135deg, #8B45F8, #BB86FC);
+  box-shadow: 0 8px 22px rgba(139, 69, 248, 0.8);
+  transform: scale(1.05);
   outline: none;
 }
 
+/* Error Message */
 .a_a-error-message {
-  margin: 1.2rem auto 0;
-  max-width: 420px;
+  margin: 2rem auto 0;
+  max-width: 480px;
   background: #B00020;
-  color: #fff;
-  padding: 0.9rem 1.2rem;
-  border-radius: 8px;
+  color: #ffffff;
+  padding: 1rem 1.4rem;
+  border-radius: 12px;
   font-weight: 600;
   text-align: center;
   animation: shake 0.4s ease;
-  box-shadow: 0 0 12px #B00020AA;
+  box-shadow: 0 0 15px #B00020AA;
 }
 
-/* Shake animation for error */
+/* Shake animation */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-6px); }
-  50% { transform: translateX(6px); }
-  75% { transform: translateX(-6px); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
 }
 
-/* Responsive */
-@media (max-width: 480px) {
-  .a_a-register-section {
-    margin: 2rem 1rem;
-    padding: 2rem 1.5rem;
+.a_a-main-content {
+    background-color: #121212;
+    min-height: calc(80vh - 165px); /* Adjusting for nav+footer */
   }
-}

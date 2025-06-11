@@ -1,0 +1,200 @@
+/* =========================
+   Desktop Styles - collections-details-styles.css
+   Based on Dark Theme Palette
+========================= */
+
+body {
+  background-color: #121212;
+  color: #E0E0E0;
+}
+
+.a_a-collections-header {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.a_a-collections-btn {
+  background-color: #BB86FC;
+  color: #121212;
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px #BB86FC;
+}
+
+.a_a-collections-btn:hover {
+  background-color: #3700B3;
+  color: #E0E0E0;
+  box-shadow: 0 0 12px #BB86FC;
+}
+
+.a_a-collections-details,
+.a_a-collections-documents,
+.a_a-add-documents-form {
+  background: #1F1B24;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  margin-bottom: 2rem;
+}
+
+.a_a-collections-details-title,
+.a_a-collections-documents-title,
+.a_a-add-documents-form h3 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: #E0E0E0;
+}
+
+.a_a-collections-info p {
+  margin: 0.5rem 0;
+  color: #E0E0E0;
+}
+
+.a_a-collections-actions,
+.a_a-document-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.a_a-card-btn {
+  padding: 0.5rem 1rem;
+  background-color: #BB86FC;
+  color: #121212;
+  border-radius: 10px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px #BB86FC;
+  border: none;
+}
+
+.a_a-card-btn:hover {
+  background-color: #3700B3;
+  color: #E0E0E0;
+  box-shadow: 0 0 12px #BB86FC;
+}
+
+.a_a-card-btn.danger {
+  background-color: #B00020;
+  color: #E0E0E0;
+  box-shadow: 0 0 8px #B00020;
+}
+
+.a_a-card-btn.danger:hover {
+  background-color: #CF6679;
+  color: #121212;
+  box-shadow: 0 0 12px #CF6679;
+}
+
+.a_a-document-card {
+  padding: 1rem;
+  background-color: #1A1A1A;
+  border-radius: 12px;
+  border: 1px solid #2a2a2a;
+}
+
+.a_a-document-name,
+.a_a-document-uploaded {
+  margin: 0.4rem 0;
+  color: #E0E0E0;
+}
+
+.a_a-no-documents {
+  color: #B0B0B0;
+  font-style: italic;
+}
+
+.a_a-add-documents-form label {
+  display: block;
+  margin: 0.6rem 0;
+  color: #E0E0E0;
+}
+
+.a_a-add-documents-form button {
+  margin-top: 1rem;
+  background-color: #BB86FC;
+  color: #121212;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 8px #BB86FC;
+  transition: all 0.3s ease;
+}
+
+.a_a-add-documents-form button:hover {
+  background-color: #3700B3;
+  color: #E0E0E0;
+  box-shadow: 0 0 12px #BB86FC;
+}
+
+.collapsible-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+  background-color: #1F1B24;
+  border-bottom: 1px solid #3700B3;
+}
+
+
+.collapsible-toggle{
+  display: inline-block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background-color: #BB86FC;
+  color: #121212;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #BB86FC;
+  margin-right: 0.5rem;
+}
+
+.collapsible-toggle {
+  background-color: #f0f0f0;
+  color: #333;
+  font-weight: bold;
+  border: none;
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+}
+
+.collapsible-toggle:hover {
+  background-color: #e0e0e0;
+}
+
+.collapsible-toggle.open::after {
+  content: "▴";
+  float: right;
+}
+
+.collapsible-toggle::after {
+  content: "▾";
+  float: right;
+}
+
+.collapsible-content {
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  padding: 0 1rem;
+  margin-top: 0.5rem;
+}

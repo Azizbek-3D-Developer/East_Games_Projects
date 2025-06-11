@@ -1,40 +1,92 @@
+:root {
+  --accent: #bb86fc;
+  --primary-text: #e0e0e0;
+  --secondary-text: #a0a0a0;
+  --background-dark: #1f1f1f;
+  --border-dark: #2a2a2a;
+  --success: #4caf50;
+}
+
+.a_a-main-content {
+    background-color: #121212;
+    min-height: calc(82vh); /* Adjusting for nav+footer */
+}
+
 .status-container {
   max-width: 600px;
-  margin: 3rem auto;
-  padding: 2rem;
-  background-color: #1f1f1f;
-  border-left: 4px solid var(--accent);
-  border-radius: 12px;
-  box-shadow: 0 0 12px rgba(187, 134, 252, 0.2);
+  margin: 2rem auto 2rem;
+  padding: 2.5rem 3rem;
+  background-color: var(--background-dark);
+  border-left: 5px solid var(--accent);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(187, 134, 252, 0.3);
   color: var(--primary-text);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
 }
 
 .status-message {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #4caf50; /* green success color */
-  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--success);
+  margin-bottom: 2rem;
+  text-shadow: 0 0 5px #4caf5077;
 }
 
 .status-metrics h2 {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   color: var(--accent);
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 6px #bb86fc88;
 }
 
 .status-metrics ul {
   list-style: none;
   padding: 0;
   text-align: left;
+  border-radius: 10px;
+  background-color: #2a2a2a;
+  padding: 1.2rem;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.03);
 }
 
 .status-metrics li {
-  font-size: 1rem;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #2a2a2a;
+  font-size: 1.05rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid #BB86FC;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.status-metrics li:last-child {
+  border-bottom: none;
 }
 
 .status-metrics li strong {
   color: var(--secondary-text);
+  min-width: 180px;
+  font-weight: 600;
+}
+
+/* Responsive Styles */
+@media (max-width: 480px) {
+  .status-container {
+    margin: 2.5rem 1rem;
+    padding: 2rem 1.2rem;
+  }
+
+  .status-metrics h2 {
+    font-size: 1.4rem;
+  }
+
+  .status-metrics li {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1rem;
+  }
+
+  .status-metrics li strong {
+    margin-bottom: 0.3rem;
+  }
 }

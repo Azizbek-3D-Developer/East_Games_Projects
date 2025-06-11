@@ -1,0 +1,45 @@
+@media (max-width: 480px) {
+  .a_a-collections-header {
+    text-align: center;
+    margin: 1.2rem 0;
+  }
+
+  .a_a-collections-btn {
+    font-size: 0.95rem;
+    padding: 0.4rem 1rem;
+  }
+
+  .a_a-subheading {
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .a_a-huffman-info p {
+    font-size: 0.95rem;
+  }
+
+  .a_a-fulltext-preview {
+    padding: 1rem;
+    margin-top: 1.2rem;
+  }
+
+  .a_a-text-block {
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  .a_a-statistics-content {
+    margin-top: 1.5rem;
+  }
+
+  .a_a-statistics-table th,
+  .a_a-statistics-table td {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .a_a-empty-stat-msg {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+}

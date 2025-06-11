@@ -1,0 +1,32 @@
+/* styles/Dashboard/Collections/collections-mobile-styles.css */
+
+@media (max-width: 768px) {
+  .a_a-collections-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .a_a-collections-btn {
+    width: 90%;
+    text-align: center;
+  }
+
+  .a_a-collections-list {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+
+  .a_a-collections-card {
+    padding: 1rem;
+  }
+
+  .a_a-document-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .a_a-card-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

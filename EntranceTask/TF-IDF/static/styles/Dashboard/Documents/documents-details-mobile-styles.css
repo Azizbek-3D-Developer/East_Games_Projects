@@ -1,0 +1,26 @@
+
+/* Mobile Styles (Override or Additions) */
+@media (max-width: 768px) {
+  .document-details-container {
+    padding: 1rem;
+  }
+
+  .a_a-document-card,
+  .collapsible-header,
+  .collapsible-content {
+    padding: 0.75rem;
+  }
+
+  .a_a-card-btn {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .a_a-add-documents-form form {
+    gap: 0.75rem;
+  }
+
+  .toggle-icon {
+    font-size: 1.2rem;
+  }
+}

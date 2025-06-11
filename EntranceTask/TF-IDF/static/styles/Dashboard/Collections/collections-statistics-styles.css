@@ -1,0 +1,142 @@
+body {
+  background-color: #121212;
+  color: #E0E0E0;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.a_a-collections-header {
+  display: flex;
+  justify-content: flex-start;
+  padding: 1rem 2rem;
+  background-color: #1F1B24;
+  border-bottom: 2px solid #3700B3;
+  box-shadow: 0 0 8px #3700B3;
+}
+
+.a_a-collections-btn {
+  color: #BB86FC;
+  background-color: transparent;
+  padding: 0.6rem 1.2rem;
+  border: 2px solid #BB86FC;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-right: 1rem;
+  transition: all 0.3s ease;
+}
+
+.a_a-collections-btn:hover,
+.a_a-collections-btn.active {
+  background-color: #3700B3;
+  box-shadow: 0 0 10px #BB86FC;
+  color: #E0E0E0;
+}
+
+.a_a-subheading {
+  color: #BB86FC;
+  margin: 1.5rem 2rem 0.5rem;
+  font-size: 1.5rem;
+  text-shadow: 0 0 6px #BB86FC;
+}
+
+.a_a-documents-list {
+  list-style-type: none;
+  padding: 0 2rem;
+  margin: 0;
+}
+
+.a_a-documents-list li {
+  margin-bottom: 0.8rem;
+  color: #E0E0E0;
+}
+
+.a_a-fulltext-preview {
+  padding: 1rem 2rem;
+}
+
+.a_a-text-block {
+  background-color: #1F1B24;
+  padding: 1rem;
+  border-radius: 10px;
+  color: #E0E0E0;
+  overflow-x: auto;
+  box-shadow: 0 0 8px #BB86FC;
+  white-space: pre-wrap;
+}
+
+.a_a-statistics-content {
+  padding: 1.5rem 2rem;
+}
+
+.a_a-statistics-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: #1F1B24;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 8px #BB86FC;
+}
+
+.a_a-statistics-table th,
+.a_a-statistics-table td {
+  padding: 0.8rem;
+  text-align: left;
+  border-bottom: 1px solid #3700B3;
+  color: #E0E0E0;
+}
+
+.a_a-statistics-table th {
+  background-color: #3700B3;
+  color: #E0E0E0;
+  text-shadow: 0 0 4px #E0E0E0;
+}
+
+.a_a-empty-stat-msg {
+  padding: 2rem;
+  color: #B0B0B0;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .a_a-collections-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .a_a-collections-btn {
+    margin: 0.5rem 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .a_a-subheading {
+    margin: 1rem 1rem 0.5rem;
+    font-size: 1.2rem;
+  }
+
+  .a_a-documents-list {
+    padding: 0 1rem;
+  }
+
+  .a_a-fulltext-preview {
+    padding: 1rem;
+  }
+
+  .a_a-text-block {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+
+  .a_a-statistics-content {
+    padding: 1rem;
+  }
+
+  .a_a-statistics-table th,
+  .a_a-statistics-table td {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+}

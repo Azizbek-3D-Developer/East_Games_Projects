@@ -60,15 +60,6 @@ async def connect_to_db():
         await database.execute("PRAGMA foreign_keys = ON;").close()
 
 
-# @app.on_event("startup")
-# async def startup():
-#     await database.connect()
-
-# @app.on_event("shutdown")
-# async def shutdown():
-#     await database.disconnect()
-
-
 if __name__ == "__main__":
     import uvicorn
     # uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)

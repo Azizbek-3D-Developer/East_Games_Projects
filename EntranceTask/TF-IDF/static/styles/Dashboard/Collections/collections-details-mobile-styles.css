@@ -1,0 +1,32 @@
+
+/* =========================
+   Mobile Styles - collections-details-mobile-styles.css
+========================= */
+
+@media (max-width: 768px) {
+  .a_a-collections-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .a_a-collections-btn,
+  .a_a-card-btn,
+  .a_a-add-documents-form button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .a_a-collections-details,
+  .a_a-collections-documents,
+  .a_a-add-documents-form {
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+  .a_a-collections-actions,
+  .a_a-document-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+}

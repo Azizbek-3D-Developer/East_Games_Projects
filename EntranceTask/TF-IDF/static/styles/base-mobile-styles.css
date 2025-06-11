@@ -1,0 +1,61 @@
+/* ============================
+   📱 Mobile Styles (Redmi Note 11S ref)
+   File: base-styles-mobile.css
+   ============================ */
+
+@media (max-width: 768px) {
+    body {
+        font-size: 15px;
+    }
+
+    .a_a-navbar {
+        flex-direction: column;
+        padding: 1rem 1rem;
+        text-align: center;
+    }
+
+    .a_a-nav-left, .a_a-nav-right {
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 8px;
+        justify-content: center;
+        gap: 0.8rem;
+    }
+
+    .a_a-nav-avatar {
+        width: 36px;
+        height: 36px;
+    }
+
+    .a_a-nav-brand {
+        font-size: 1.1rem;
+    }
+
+    .a_a-nav-btn {
+        padding: 0.4rem 1rem;
+        margin: 0 10px;
+        font-size: 0.95rem;
+    }
+
+    .a_a-footer {
+        font-size: 0.9rem;
+        padding: 0.8rem 0;
+    }
+}
+
+/* Ultra small screens */
+@media (max-width: 480px) {
+    .a_a-nav-btn {
+        margin: 0 5px;
+        padding: 0.35rem 0.8rem;
+    }
+
+    .a_a-nav-brand {
+        font-size: 1rem;
+    }
+
+    .a_a-nav-avatar {
+        width: 32px;
+        height: 32px;
+    }
+}

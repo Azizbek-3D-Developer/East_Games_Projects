@@ -1,0 +1,62 @@
+@media (max-width: 480px) {
+    .a_a-tfidf-details {
+        padding: 1rem;
+        margin: 1rem auto;
+        width: 95%;
+    }
+
+    .a_a-tfidf-table th,
+    .a_a-tfidf-table td {
+        padding: 0.5rem;
+        font-size: 0.85rem;
+    }
+
+    .a_a-tfidf-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+  
+    .a_a-documents-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .a_a-documents-btn {
+    width: 90%;
+    text-align: center;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .a_a-documents-list {
+    grid-template-columns: 1fr;
+    padding: 0.5rem;
+  }
+
+  .a_a-document-card {
+    padding: 1rem;
+  }
+
+  .a_a-document-title {
+    font-size: 1.15rem;
+  }
+
+  .a_a-document-meta {
+    font-size: 0.9rem;
+  }
+
+  .a_a-card-btn {
+    width: 100%;
+    display: inline-block;
+    font-size: 0.95rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .a_a-no-documents {
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    padding: 0.5rem;
+  }
+}

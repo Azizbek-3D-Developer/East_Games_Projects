@@ -1,0 +1,35 @@
+@media (max-width: 480px) {
+  .a_a-login-section {
+    margin: 2rem 1rem;
+    padding: 2rem 1.5rem;
+    border-radius: 14px;
+    box-shadow: 0 0 20px rgba(187, 134, 252, 0.25);
+  }
+
+  .a_a-login-title {
+    font-size: 2rem;
+  }
+
+  .a_a-form-input {
+    width: 90%;
+    font-size: 1rem;
+    padding: 0.7rem 1rem;
+  }
+
+  .a_a-btn-login {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.7rem 1rem;
+  }
+
+  .a_a-error-message {
+    margin-top: 1.5rem;
+    padding: 0.9rem 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  .a_a-main-content {
+    background-color: #121212;
+    min-height: calc(98vh - 165px); /* Adjusting for nav+footer */
+  }
+}
