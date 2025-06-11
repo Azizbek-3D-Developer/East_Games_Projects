@@ -1,0 +1,52 @@
+{% extends "Dashboard/dashboard.html" %}
+
+{% block title %}Collection-Details{% endblock %}
+
+{% block secondary_stylesheets %}
+    <link rel="stylesheet" href="{{ url_for('static', path='styles/Dashboard/Collections/collections-styles.css') }}" />
+{% endblock %}
+
+{% block data_container %}
+    <div class="a_a-collections-header">
+        <a href="/dashboard/collections/{{ collection_id }}" class="a_a-collections-btn active">Back to collection</a>
+    </div>
+    
+    <div class="a_a-collection-info">
+        <h2 class="a_a-subheading">📄 Documents in This Collection</h2>
+        <ul class="a_a-documents-list">
+        {% for doc in documents %}
+            <li><strong>{{ doc.filename }}</strong> (uploaded at {{ doc.uploaded_at.strftime('%Y-%m-%d %H:%M') }})</li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="a_a-fulltext-preview">
+        <h2 class="a_a-subheading">📝 Combined Document Text</h2>
+        <pre class="a_a-text-block">{{ filetext }}</pre>
+    </div>
+    {% if statistics %}
+        <div class="a_a-statistics-content">
+            <h2 class="a_a-subheading">📊 Top {{ statistics | length }} TF-IDF Terms</h2>
+            <table class="a_a-statistics-table">
+            <thead>
+                <tr>
+                <th>Rank</th>
+                <th>Term</th>
+                <th>TF-IDF Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stat in statistics %}
+                <tr>
+                    <td>{{ stat.term }}</td>
+                    <td>{{ '%.4f' % stat.score }}</td>
+                </tr>
+                {% endfor %}
+            
+        </tbody>
+
+            </table>
+        </div>
+    {% else %}
+        <p class="a_a-empty-stat-msg">No TF-IDF terms found. Try adding more meaningful content to your documents.</p>
+    {% endif %}
+{% endblock %}

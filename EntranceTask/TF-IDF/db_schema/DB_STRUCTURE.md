@@ -82,6 +82,16 @@ Stores aggregated processing metrics for uploaded files, including processing ti
 
 ---
 
+##  📊 Huffman
+| Field        | Type     | Description                              |
+| ------------ | -------- | ---------------------------------------- |
+| id           | Integer  | Primary key                              |
+| user_id     | Integer  | FK to Users.id                           |
+| document_id | Integer  | FK to Documents.id                       |
+| pairs        | JSON     | Huffman encoding pairs: letter/code list |
+| created_at  | DateTime | Timestamp when the encoding was created  |
+
+
 
 
 ## ⚠️ Notes

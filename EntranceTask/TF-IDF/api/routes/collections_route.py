@@ -9,6 +9,7 @@ from api.auth.dependencies import get_current_user
 from api.crud.collection_crud import get_all_collection, create_new_collection, get_collection_by_id, delete_collection_by_id, update_collection_by_id
 from api.crud.documents_crud import get_document_by_id, get_all_documents
 from api.crud.collection_document_crud import get_documents_by_collection
+from api.services.tf_idf_service import compute_tfidf_from_text_for_statistics, compute_tfidf_from_text
 
 
 # Get All
@@ -176,3 +177,50 @@ async def create_new_collection_page(
         status_code=status.HTTP_303_SEE_OTHER
     )
   
+  
+ 
+ 
+# Statistics for collections  
+@router.get(f"{baselink}{col_link}/{{collection_id}}/statistics", response_class=HTMLResponse)
+async def get_statistics_for_collection_documents_page(
+    request: Request,
+    collection_id: int,
+    user = Depends(get_current_user)
+):
+    # Get doc IDs from the junction table
+    collection_documents_list_ids = await get_documents_by_collection(collection_id)
+    
+    # print("Fetched doc IDs from junction table:", collection_documents_list_ids)
+
+    collection_documents = []
+    combined_full_text = ""
+
+    for doc_id in collection_documents_list_ids:
+        # print("Getting document with ID:", doc_id.document_id)
+        doc = await get_document_by_id(user.id, doc_id.document_id)
+        if doc:
+            # print(doc.filecontent)
+            combined_full_text += f"{doc.filecontent} "
+            collection_documents.append(doc)
+            # print("document loaded")
+        
+    text_stats = []
+    combined_full_text = combined_full_text.strip(" ")
+    if combined_full_text:
+        try:
+            text_stats = await compute_tfidf_from_text(combined_full_text)
+            print(f"result of tf-idf:  {text_stats}")
+        except ValueError:
+            text_stats = []
+
+    return templates.TemplateResponse(
+        "Dashboard/Collections/collection-statistics.html",
+        {
+            "request": request,
+            "useremail": user.email,
+            "filetext": combined_full_text,
+            "documents": collection_documents,
+            "statistics": text_stats,
+            "collection_id": collection_id
+        }
+    )

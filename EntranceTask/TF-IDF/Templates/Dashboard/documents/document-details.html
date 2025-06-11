@@ -15,10 +15,14 @@
     <p><strong>Uploaded at:</strong> {{ document.uploaded_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
     <div class="a_a-doc-content">
     <p> {{document.filecontent}} </p>
+    <div class="a_a-huffman-button-section">
+      <a href="/dashboard/documents/{{ document.id }}/huffman" class="a_a-card-btn">View Huffman Encoding</a>
+    </div>
+
   </section>
 
   <div class="a_a-collections-documents">
-    <h3 class="a_a-collections-documents-title">Documents in this Collection</h3>
+    <h3 class="a_a-collections-documents-title">Document belongs to these Collections</h3>
 
     {% if collections %}
       <div class="a_a-documents-list">

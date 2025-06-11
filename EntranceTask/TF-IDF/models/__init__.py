@@ -4,6 +4,6 @@ from .collection import collections
 from .statistics import statistics
 from .collection_document import collection_documents
 from .metrics import metrics
-
+from .huffman import huffman_encodings
 
 # Importing all tables from folder models

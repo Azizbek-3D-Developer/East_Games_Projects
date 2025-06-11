@@ -14,6 +14,16 @@ from api.crud.statistics_crud import (
     get_statistics_by_document_ids, get_statistics_by_document_id, create_statistics,
     update_statistics, delete_statistics
 )
+from api.services.huffman_service import compute_huffman_from_text
+from api.crud.huffman_crud import (
+    create_huffman_encoding,
+    update_huffman_encoding
+)
+from api.schemas.huffman_schema import (
+    HuffmanCreate, 
+    HuffmanRead,
+    HuffmanUpdate
+)
 from api.services.tf_idf_service import compute_tfidf_from_text
 from api.utils.links import doclink, baselink, UPLOAD_DIR
 from api.schemas.documents_schema import DocumentCreate
@@ -77,11 +87,14 @@ async def upload_document(
             content = await file.read()
             await out_file.write(content)
 
+        # tf-idf 
         text = content.decode("utf-8")
         tfidf_result = await compute_tfidf_from_text(text)
 
         processing_duration = round(time.time() - start_time, 3)
 
+
+        # creating new document
         document_data = DocumentCreate(
             filename=filename,
             path=os.path.join(str(user.id), unique_filename),  # relative path
@@ -91,12 +104,32 @@ async def upload_document(
         
         doc_data = await create_document(document_data) # getting the id of the created document
 
+        
         # creating the statistics for the document
         statistics_data = StatisticsCreate(
             document_id=doc_data["id"],
             tfidf_json=tfidf_result
         )
         await create_statistics(statistics_data)
+        # ➕ Create Huffman data
+        try:
+            text = text.strip()
+            huffman_result = await compute_huffman_from_text(text)
+
+            cleaned_huffman = [
+                pair for pair in huffman_result
+                if pair.get("letter") and pair.get("code")
+            ]
+
+            huffman_data = HuffmanCreate(
+                document_id=doc_data["id"],
+                user_id=user.id,
+                pairs=cleaned_huffman
+            )
+            await create_huffman_encoding(huffman_data)
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"Huffman generation failed: {e}")
+
 
         # updating the metrics for the document
         await metrics_service.update_metrics(
@@ -249,6 +282,25 @@ async def update_document_route(
         statistics_data = StatisticsUpdate(tfidf_json=tfidf_result)
         await update_statistics(document_id, statistics_data)
 
+        text = text.strip()
+        # Recompute Huffman encoding
+        huffman_result = compute_huffman_from_text(text)
+
+        # Clean invalid Huffman pairs (e.g. empty letter or code)
+        cleaned_pairs = [
+            pair for pair in huffman_result["code_map"]
+            if pair.get("letter") and pair.get("code")
+        ]
+
+        # Update Huffman encoding in DB
+        huffman_update_data = HuffmanUpdate(
+            user_id=user.id,
+            document_id=document_id,
+            pairs=cleaned_pairs
+        )
+        await update_huffman_encoding(huffman_update_data)
+
+        
         # Log updated metrics
         processing_duration = round(time.time() - start_time, 3)
         await metrics_service.update_metrics(
@@ -272,42 +324,6 @@ async def update_document_route(
         url=f"{baselink}{doclink}/{document_id}",
         status_code=status.HTTP_303_SEE_OTHER,
     )
-
-
-
-
-# # deleting the document
-# @router.post(f"{baselink}{doclink}/{{document_id}}/delete", name="document_delete")
-# async def delete_document_route(
-#     request: Request,
-#     document_id: int,
-#     user=Depends(get_current_user),
-# ):
-#     result = await delete_document(user.id, document_id)
-
-#     if result == 1:
-#         # Delete statistics
-#         await delete_statistics(document_id)
-
-#         # Delete file from disk
-#         doc = await get_document_by_id(user.id, document_id)
-#         if doc:
-#             full_path = os.path.join(UPLOAD_DIR, doc.path)
-#             if os.path.exists(full_path) and os.path.isfile(full_path):
-#                 try:
-#                     os.remove(full_path)
-#                 except Exception as e:
-#                     print(f"Error deleting file: {e}")
-#                     logger.error(f"Error deleting file from disk: {e}")
-#             else:
-#                 print(f"File not found or not a valid file: {full_path}")
-#                 logger.warning(f"File not found or not a valid file: {full_path}")
-
-#         return RedirectResponse(
-#             url=f"{baselink}{doclink}", status_code=status.HTTP_303_SEE_OTHER
-#         )
-#     else:
-#         raise HTTPException(status_code=400, detail="Delete failed or not authorized")
 
 
 @router.post(f"{baselink}{doclink}/{{document_id}}/delete", name="document_delete")

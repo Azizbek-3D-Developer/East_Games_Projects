@@ -1,0 +1,62 @@
+{% extends "Dashboard/dashboard.html" %}
+
+{% block title %}Huffman-Encoding{% endblock %}
+
+{% block secondary_stylesheets %}
+    <link rel="stylesheet" href="{{ url_for('static', path='styles/Dashboard/Huffman/huffman-styles.css') }}" />
+{% endblock %}
+
+{% block data_container %}
+    <div class="a_a-collections-header">
+        <a href="/dashboard/documents" class="a_a-collections-btn active">← Back to Documents</a>
+    </div>
+
+    <div class="a_a-huffman-info">
+        <h2 class="a_a-subheading">🗂 Document:</h2>
+        <p><strong>Filename:</strong> {{ document.filename }}</p>
+        <p><strong>Uploaded At:</strong> {{ document.uploaded_at.strftime('%Y-%m-%d %H:%M') }}</p>
+    </div>
+
+    <div class="a_a-fulltext-preview">
+        <h2 class="a_a-subheading">📜 Original Text</h2>
+        <pre class="a_a-text-block">{{ document.filecontent }}</pre>
+    </div>
+
+    {% if huffman.pairs %}
+        <div class="a_a-statistics-content">
+            <h2 class="a_a-subheading">🔢 Huffman Code Table</h2>
+            <table class="a_a-statistics-table">
+                <thead>
+                    <tr>
+                        <th>Character</th>
+                        <th>Huffman Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pair in huffman.pairs %}
+                        {% if pair.letter and pair.code %}
+                            <tr>
+                                <td>
+                                    {% if pair.letter == ' ' %}
+                                        [space]
+                                    {% elif pair.letter == '\\n' %}
+                                        [newline]
+                                    {% elif pair.letter == '\\t' %}
+                                        [tab]
+                                    {% else %}
+                                        {{ pair.letter }}
+                                    {% endif %}
+                                </td>
+                                <td>{{ pair.code }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+
+
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="a_a-empty-stat-msg">No Huffman data available. This might be an empty file.</p>
+    {% endif %}
+{% endblock %}
