@@ -5,6 +5,10 @@ from pathlib import Path
 
 # Constants
 CONTAINER_NAME = "tfidf_app"
+IMAGE_NAME = "tfidf_image"
+IMAGE_TAG = "latest"
+HOST_PORT = 9000
+CONTAINER_PORT = 9000
 CONTAINER_ID_FILE = ".container_id"
 PROJECT_DIR = Path(__file__).parent.resolve()
 
@@ -17,18 +21,21 @@ def run_command(command, cwd=None):
 def main():
     print("🔧 Starting deployment...")
 
-    # Step 1: Install dependencies
-    run_command("pip install -r requirements.txt")
+    # Step 1: Create .env file
+    run_command("python3 setup_env.py")
 
-    # Step 2: Create .env
-    run_command("python setup_env.py")
+    # Step 2: Initialize the database
+    run_command("python3 -m db_schema.db_create")
 
-    # Step 3: Create database
-    run_command("python -m db_schema.db_create")
+    # Step 3: Build Docker image
+    run_command(f"docker build -t {IMAGE_NAME}:{IMAGE_TAG} .")
 
-    # Step 4: Build and run Docker
-    run_command(f"docker compose build")
-    run_command(f"docker compose up -d --force-recreate")
+    # Step 4: Run container
+    run_command(
+        f"docker run --name {CONTAINER_NAME} "
+        f"-p {HOST_PORT}:{CONTAINER_PORT} "
+        f"-d {IMAGE_NAME}:{IMAGE_TAG}"
+    )
 
     # Step 5: Save container ID
     container_id = subprocess.check_output(
@@ -46,4 +53,4 @@ if __name__ == "__main__":
     main()
 
 # Run with:
-# python deploy_run.py
+# python3 deploy_run.py

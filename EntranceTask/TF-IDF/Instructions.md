@@ -9,45 +9,55 @@ This document provides clear, step-by-step instructions for deploying and runnin
 ### 🔧 Prerequisites:
 - Git installed  
 - Python 3.11+  
-- Docker & Docker Compose installed  
 - Internet connection  
 
 ---
 
-### 🪜 Step-by-Step Deployment Guide
+### 🪜 Step-by-Step Deployment Guide (No Docker)
 
-1. **Create project folder and enter it**:
-    ```bash
-    mkdir my_project_folder && cd my_project_folder
-    ```
+1. **Create a project folder and enter it**:
+   ```bash
+   mkdir my_project_folder && cd my_project_folder
+   ```
 
 2. **Clone the project**:
-    ```bash
-    git clone https://github.com/Azizbek-3D-Developer/East_Games_Projects.git
-    cd EntranceTask/TF-IDF
-    ```
+   ```bash
+   git clone https://github.com/Azizbek-3D-Developer/East_Games_Projects.git
+   cd East_Games_Projects/EntranceTask/TF-IDF
+   ```
 
-3. **Run the special deployment script**:
-    ```bash
-    python deploy_run.py
-    ```
+3. **Create and activate a virtual environment**:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
 
-    This will:
-    - Install Python packages from `requirements.txt`
-    - Create a `.env` file
-    - Initialize the database
-    - Build and run the Docker container
+4. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-4. **Check if it is working**  
+5. **Run the deployment script**:
+   ```bash
+   python3 deploy_run.py
+   ```
+
+   This will:
+   - Create a `.env` file (if needed)
+   - Initialize the database
+   - Start the app with Uvicorn
+
+6. **Check if it is working**  
    Open your browser and go to:
 
-    http://<your_vm_ip>:9000
-    
+   ```
+   http://<your_vm_ip>:9000
+   ```
 
-5. **To stop the application**, run this inside the `TF-IDF` folder:
- ```bash
- python deploy_stop.py
- ```
+7. **To stop the application**, press `Ctrl+C` in the terminal or use:
+   ```bash
+   python3 deploy_stop.py
+   ```
 
 ---
 
@@ -56,43 +66,52 @@ This document provides clear, step-by-step instructions for deploying and runnin
 ### 🔧 Что потребуется:
 - Установленный Git  
 - Python 3.11 или новее  
-- Docker и Docker Compose  
 - Подключение к интернету  
 
 ---
 
-### 🪜 Пошаговое руководство по развертыванию
+### 🪜 Пошаговое руководство по развертыванию (без Docker)
 
 1. **Создайте папку для проекта и перейдите в неё**:
- ```bash
- mkdir my_project_folder && cd my_project_folder
- ```
+   ```bash
+   mkdir my_project_folder && cd my_project_folder
+   ```
 
-2. **Клонируйте проект из репозитория**:
- ```bash
- git clone https://github.com/Azizbek-3D-Developer/East_Games_Projects.git
- cd EntranceTask/TF-IDF
- ```
+2. **Клонируйте проект**:
+   ```bash
+   git clone https://github.com/Azizbek-3D-Developer/East_Games_Projects.git
+   cd East_Games_Projects/EntranceTask/TF-IDF
+   ```
 
-3. **Запустите скрипт развертывания**:
- ```bash
- python deploy_run.py
- ```
+3. **Создайте и активируйте виртуальное окружение**:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
 
- Скрипт выполнит:
- - Установку зависимостей из `requirements.txt`
- - Создание `.env` файла
- - Инициализацию базы данных
- - Сборку и запуск контейнера Docker
+4. **Установите зависимости**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-4. **Проверьте, что приложение работает**  
-Откройте браузер и введите:
+5. **Запустите скрипт развертывания**:
+   ```bash
+   python3 deploy_run.py
+   ```
 
-    http://<your_vm_ip>:9000
+   Скрипт выполнит:
+   - Создание файла `.env` (если он отсутствует)
+   - Инициализацию базы данных
+   - Запуск приложения через Uvicorn
 
-5. **Чтобы остановить приложение**, выполните в папке `TF-IDF`:
- ```bash
- python deploy_stop.py
- ```
+6. **Проверьте работу приложения**  
+   Откройте браузер и перейдите по адресу:
 
----
+   ```
+   http://<your_vm_ip>:9000
+   ```
+
+7. **Остановить приложение** можно с помощью `Ctrl+C` в терминале или команды:
+   ```bash
+   python3 deploy_stop.py
+   ```
