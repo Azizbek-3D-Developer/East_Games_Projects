@@ -1,10 +1,23 @@
 # Changelog
 
-# Changelog
-
 All notable changes to this project will be documented in this file.
 
-## [2.0.0] - Total restructure of the project  2025 - 06 -08
+## [2.1.0] - 2025-06-12
+
+### Added
+
+- Completed Huffman coding feature:
+  - `/dashboard/documents/{document_id}/huffman` endpoint now renders Huffman encoding data.
+  - Huffman model added to `models/huffman.py`.
+  - Pydantic schema and service logic added for Huffman encoding and storage.
+  - Database support for Huffman encoding results.
+
+
+- JavaScript toggle scripts for section collapsibility.
+
+---
+
+## [2.0.0] - Total restructure of the project – 2025-06-08
 
 ### Folders added
 
@@ -71,9 +84,25 @@ All notable changes to this project will be documented in this file.
 
 - .gitignore
 
+---
 
+### Features
+- New route documentation file created with detailed grouping of all project endpoints (public and authenticated).
+- Document Details page now includes:
+  - Visually separated and collapsible sections for:
+    - Document metadata
+    - TF-IDF statistics
+    - Associated collections
+    - Add-to-collection form
+- Collection Details page enhanced:
+  - Matching collapsible structure for consistency.
+  - Uses separate CSS for desktop and mobile.
+  - Dynamic listing of documents within a collection.
+- Fully responsive layout styles for `statistics_detail.html`, `collection-details.html`, and `document-details.html`.
+---
 
 ## [1.1.0] - 2025-05-26
+
 ### Added
 - Support for configuration via `.env` file: upload directory, top K TF-IDF words count, and app version.
 - New endpoints added:
@@ -84,7 +113,10 @@ All notable changes to this project will be documented in this file.
 - Refined TF-IDF processing to support configurable number of top words.
 - Dark-themed user interface improvements.
 
+---
+
 ## [1.0.0] - 2025-05-02
+
 ### Initial release
 - Basic FastAPI web app for uploading text files.
 - TF-IDF computation for top 50 words.

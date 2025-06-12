@@ -284,11 +284,11 @@ async def update_document_route(
 
         text = text.strip()
         # Recompute Huffman encoding
-        huffman_result = compute_huffman_from_text(text)
+        huffman_result = await compute_huffman_from_text(text)
 
         # Clean invalid Huffman pairs (e.g. empty letter or code)
         cleaned_pairs = [
-            pair for pair in huffman_result["code_map"]
+            pair for pair in huffman_result
             if pair.get("letter") and pair.get("code")
         ]
 

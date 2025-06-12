@@ -194,6 +194,7 @@ async def get_statistics_for_collection_documents_page(
 
     collection_documents = []
     combined_full_text = ""
+    individual_texts = []
 
     for doc_id in collection_documents_list_ids:
         # print("Getting document with ID:", doc_id.document_id)
@@ -202,14 +203,15 @@ async def get_statistics_for_collection_documents_page(
             # print(doc.filecontent)
             combined_full_text += f"{doc.filecontent} "
             collection_documents.append(doc)
+            individual_texts.append(doc.filecontent)
             # print("document loaded")
         
     text_stats = []
     combined_full_text = combined_full_text.strip(" ")
-    if combined_full_text:
+    if individual_texts:
         try:
-            text_stats = await compute_tfidf_from_text(combined_full_text)
-            print(f"result of tf-idf:  {text_stats}")
+            text_stats = await compute_tfidf_from_text_for_statistics(individual_texts)
+            # print(f"result of tf-idf:  {text_stats}")
         except ValueError:
             text_stats = []
 

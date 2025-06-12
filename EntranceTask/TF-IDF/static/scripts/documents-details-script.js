@@ -8,9 +8,9 @@ const toggles = document.querySelectorAll('.collapsible-toggle');
   });
   
 document.addEventListener("DOMContentLoaded", () => {
-  const toggles = document.querySelectorAll(".collapsible-header");
+  const togglesHeader = document.querySelectorAll(".collapsible-header");
 
-  toggles.forEach(header => {
+  togglesHeader.forEach(header => {
     header.addEventListener("click", () => {
       const content = header.nextElementSibling;
       const icon = header.querySelector(".toggle-icon");

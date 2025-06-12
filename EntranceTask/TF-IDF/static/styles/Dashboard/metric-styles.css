@@ -25,6 +25,28 @@
   text-align: center;
 }
 
+.a_a-back-button{
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #BB86FC;
+  color: #121212;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #BB86FC;
+  margin-right: 0.5rem;
+}
+
+.a_a-back-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+
 .status-message {
   font-size: 1.5rem;
   font-weight: 700;

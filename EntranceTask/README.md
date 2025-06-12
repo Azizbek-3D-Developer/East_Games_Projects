@@ -1,63 +1,91 @@
-# LestaGames Entrance Task
+# 🎮 LestaGames Entrance Task / Входное задание LestaGames
 
-This repository contains the solution to the **entrance task** provided by **Lesta Games**. The task involves building a web application that processes uploaded text files, calculates the **TF-IDF** (Term Frequency-Inverse Document Frequency) scores, and displays the top words based on these scores.
+This repository contains the solution to the **entrance task** provided by **Lesta Games**.  
+В этом репозитории находится решение **входного задания**, предоставленного **Lesta Games**.
 
----
-
-### 📌 Project Overview
-
-The web application is built using **FastAPI** and **Python**, with **Jinja2** for HTML rendering.
+The task involves building a web application that processes uploaded text files, calculates the **TF-IDF** (Term Frequency-Inverse Document Frequency) scores, and displays the top words.  
+Задача заключается в создании веб-приложения, которое обрабатывает загруженные текстовые файлы, вычисляет **TF-IDF** и отображает наиболее важные слова.
 
 ---
 
-### ✅ Features
+## 📌 Project Overview / Обзор проекта
 
-- **User Registration** – Create a new user account.
-- **User Login** – Authenticate and receive a JWT token (valid for 1 hour).
-- **File Upload** – Upload `.txt` files for processing.
-- **TF-IDF Calculation** – Compute the TF-IDF scores of words using `scikit-learn`.
-- **Top 50 Words Display** – View the highest-ranked words based on TF-IDF scores.
-- **Result Page** – Visual presentation of word statistics and scores.
-- **Dark Theme** – Modern, user-friendly dark UI.
-- **Collections Support** – Users can create collections and assign documents to them.
+The web app is built with **FastAPI** and **Python**, and uses **Jinja2** for HTML rendering.  
+Веб-приложение построено на **FastAPI** и **Python**, с использованием **Jinja2** для отображения HTML.
 
 ---
 
-## Links to documents
+## ✅ Features / Функциональность
 
-#### See 📘 [Project Routes](TF-IDF/api/routes/ROUTES.md) for available routes
----
-
-#### See 📘 [API Folder Instructions](TF-IDF/api/API_DOC.md) for api folder content and how to work with them
----
-
-#### See 📘 [Database Schema](TF-IDF/db_schema/DB_STRUCTURE.md) for database structure and tables
----
-
-#### See 📜 [CHANGELOG.md](TF-IDF/CHANGELOG.md) for version history and development updates.
----
-
-#### See 📜 [Instructions.md](TF-IDF/Instructions.md) for project runing and installing guides
-
-### 🛠 Technologies Used
-
-- **FastAPI** – High-performance Python web framework.
-- **scikit-learn** – For computing TF-IDF scores.
-- **Jinja2** – Template engine for rendering HTML.
-- **python-dotenv** – Manage environment variables.
-- **CSS** – Custom styling for frontend UI.
+- 🔐 **User Registration / Регистрация пользователей**
+- 🔑 **User Login / Авторизация с JWT (1 час)**
+- 📂 **File Upload / Загрузка файлов `.txt`**
+- 📊 **TF-IDF Calculation / Расчёт TF-IDF с помощью scikit-learn**
+- 🏆 **Top 50 Words / Отображение топ-50 слов**
+- 📈 **Result Page / Страница с результатами и визуализацией**
+- 🌙 **Dark Theme / Современный тёмный UI**
+- 🗂 **Collections / Создание коллекций и назначение документов**
 
 ---
 
-### 🧠 How It Works
+## 📄 Documentation Links / Ссылки на документацию
 
-1. **Upload** – Users upload a `.txt` file using a web form.
-2. **Processing** – Server extracts content and computes TF-IDF scores using `TfidfVectorizer`.
-3. **Display** – Results are shown on a dedicated results page, highlighting the top N words.
-4. **Monitoring** – Endpoints provide application health status, version info, and performance metrics.
+- 📘 [**Project Routes**](TF-IDF/api/routes/ROUTES.md) – API endpoints  
+  📘 **Маршруты проекта**
+
+- 📘 [**API Folder Instructions**](TF-IDF/api/API_DOC.md) – Folder structure & usage  
+  📘 **Описание структуры API**
+
+- 📘 [**Database Schema**](TF-IDF/db_schema/DB_STRUCTURE.md) – Tables and relations  
+  📘 **Структура базы данных**
+
+- 📜 [**CHANGELOG.md**](TF-IDF/CHANGELOG.md) – Version history  
+  📜 **История версий и изменений**
+
+- 📜 [**Instructions.md**](TF-IDF/Instructions.md) – How to install and run the project  
+  📜 **Инструкция по запуску и установке**
 
 ---
 
+## 🛠 Technologies Used / Используемые технологии
 
+- ⚡ **FastAPI** – High-performance backend framework  
+- 🧠 **scikit-learn** – TF-IDF vectorizer and stats  
+- 🖼 **Jinja2** – HTML templating engine  
+- 📦 **python-dotenv** – Manage environment config  
+- 🎨 **CSS** – Custom dark theme and layout
 
+---
 
+## 🧠 How It Works / Как это работает
+
+1. 📤 **Upload** – User uploads a `.txt` file  
+   👤 Пользователь загружает `.txt` файл
+
+2. ⚙️ **Processing** – App computes TF-IDF with `TfidfVectorizer`  
+   📊 Приложение рассчитывает TF-IDF с помощью `TfidfVectorizer`
+
+3. 🖥 **Display** – Results shown on a visual summary page  
+   📈 Результаты отображаются на отдельной странице
+
+4. 🩺 **Monitoring** – App health, version, and metrics endpoints  
+   🩺 Эндпоинты для проверки состояния, версии и метрик
+
+---
+
+## 🚀 Deployment Help / Развёртывание
+
+To deploy and run the project on a virtual machine, follow the instructions in:  
+📘 [**Instructions.md**](TF-IDF/Instructions.md)
+
+Для развёртывания проекта на виртуальной машине, следуйте инструкции в:  
+📘 [**Instructions.md (русская версия включена)**](TF-IDF/Instructions.md)
+
+---
+
+## 💬 Feedback / Обратная связь
+
+If you’ve cloned and tested this project, feel free to leave feedback in the `VISITOR_FEEDBACK.md`!  
+Если вы запускали этот проект, не забудьте оставить отзыв в `VISITOR_FEEDBACK.md`! в папке EntranceTask
+
+---

@@ -2,6 +2,12 @@ from pydantic import BaseModel, Field
 from typing import Optional, Dict, Any, List
 from datetime import datetime
 
+class TfidfEntry(BaseModel):
+    term: str
+    tf: float
+    idf: float
+    score: float
+
 
 class StatisticsBase(BaseModel):
     document_id: int = Field(..., description="ID of the document this statistic belongs to")

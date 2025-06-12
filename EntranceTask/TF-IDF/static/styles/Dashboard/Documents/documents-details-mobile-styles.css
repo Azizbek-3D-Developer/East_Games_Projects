@@ -23,4 +23,21 @@
   .toggle-icon {
     font-size: 1.2rem;
   }
+  .collapsible-toggle {
+    font-size: 1rem;
+    padding: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .tfidf-table th,
+  .tfidf-table td {
+    font-size: 0.85rem;
+    padding: 0.4rem;
+  }
+
+  .tfidf-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 }

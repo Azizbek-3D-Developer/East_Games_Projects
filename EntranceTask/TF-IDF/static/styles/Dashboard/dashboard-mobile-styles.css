@@ -15,9 +15,11 @@
   }
 
   .a_a-nav {
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     gap: 0.6rem;
     margin: 0;
     padding: 0;
@@ -54,5 +56,12 @@
   .a_a-update-success-message {
     width: 90%;
     font-size: 0.95rem;
+  }
+  .a_a-btn:hover,
+  .a_a-btn:focus {
+    background-color: #bb86fc;
+    color: #121212;
+    box-shadow: 0 0 15px #bb86fcaa;
+    outline: none;
   }
 }

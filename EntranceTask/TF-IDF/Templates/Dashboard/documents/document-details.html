@@ -76,19 +76,26 @@
         <table class="tfidf-table">
           <thead>
             <tr>
+              <th>Rank</th>
               <th>Term</th>
-              <th>Score</th>
+              <th>TF</th>
+              <th>IDF</th>
+              <th>Score (TF × IDF)</th>
             </tr>
           </thead>
           <tbody>
             {% for item in statistics.tfidf_json %}
               <tr>
+                <td>{{ loop.index }}</td>
                 <td>{{ item.term }}</td>
-                <td>{{ "%.4f"|format(item.score) }}</td>
+                <td>{{ "%.6f"|format(item.tf) }}</td>
+                <td>{{ "%.6f"|format(item.idf) }}</td>
+                <td>{{ "%.6f"|format(item.score) }}</td>
               </tr>
             {% endfor %}
           </tbody>
         </table>
+
       {% else %}
         <p>No TF-IDF data available for this document.</p>
       {% endif %}

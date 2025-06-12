@@ -3,12 +3,12 @@ services:
   app:
     build: .
     ports:
-      - "8000:8000"
+      - "9000:9000"
     environment:
-      - APP_PORT=8000
+      - APP_PORT=9000
       - UPLOAD_DIR=uploads
       - TOP_K_WORDS=50
       - APP_VERSION=3.0.0
     volumes:
       - .:/app
-    command: uvicorn app:app --host 0.0.0.0 --port 8000
+    command: sh -c "uvicorn app:app --host 0.0.0.0 --port ${APP_PORT}"

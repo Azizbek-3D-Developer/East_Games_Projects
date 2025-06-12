@@ -1,4 +1,0 @@
-Machine learning is a method of data analysis that automates analytical model building. 
-Using algorithms that iteratively learn from data, machine learning allows computers to 
-find hidden insights without being explicitly programmed. The iterative aspect of machine 
-learning is important because as models are exposed to new data, they are able to adapt independently.

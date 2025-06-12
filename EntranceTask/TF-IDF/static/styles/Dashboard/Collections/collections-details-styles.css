@@ -198,3 +198,19 @@ body {
   padding: 0 1rem;
   margin-top: 0.5rem;
 }
+
+.collapsible-toggle{
+  display: inline-block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background-color: #BB86FC;
+  color: #121212;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #BB86FC;
+  margin-right: 0.5rem;
+}
