@@ -1,6 +1,7 @@
 version: "3.9"
 services:
   app:
+    container_name: tf-idf-task3   
     build: .
     ports:
       - "7500:7500"
