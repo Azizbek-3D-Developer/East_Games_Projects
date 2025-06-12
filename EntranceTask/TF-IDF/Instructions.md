@@ -37,15 +37,9 @@ This document provides clear, step-by-step instructions for deploying and runnin
    pip install -r requirements.txt
    ```
 
-5. **Run the deployment script**:
-   ```bash
-   python3 deploy_run.py
-   ```
-
-   This will:
-   - Create a `.env` file (if needed)
-   - Initialize the database
-   - Start the app with Uvicorn
+5.
+    python setup_env.py
+    python -m db_schema.db_create
 
 6. **Check if it is working**  
    Open your browser and go to:
@@ -54,10 +48,7 @@ This document provides clear, step-by-step instructions for deploying and runnin
    http://<your_vm_ip>:9000
    ```
 
-7. **To stop the application**, press `Ctrl+C` in the terminal or use:
-   ```bash
-   python3 deploy_stop.py
-   ```
+
 
 ---
 
@@ -94,15 +85,7 @@ This document provides clear, step-by-step instructions for deploying and runnin
    pip install -r requirements.txt
    ```
 
-5. **Запустите скрипт развертывания**:
-   ```bash
-   python3 deploy_run.py
-   ```
 
-   Скрипт выполнит:
-   - Создание файла `.env` (если он отсутствует)
-   - Инициализацию базы данных
-   - Запуск приложения через Uvicorn
 
 6. **Проверьте работу приложения**  
    Откройте браузер и перейдите по адресу:
@@ -111,7 +94,4 @@ This document provides clear, step-by-step instructions for deploying and runnin
    http://<your_vm_ip>:9000
    ```
 
-7. **Остановить приложение** можно с помощью `Ctrl+C` в терминале или команды:
-   ```bash
-   python3 deploy_stop.py
-   ```
+
