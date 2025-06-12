@@ -3,9 +3,9 @@ services:
   app:
     build: .
     ports:
-      - "9000:9000"
+      - "7500:7500"
     environment:
-      - APP_PORT=9000
+      - APP_PORT=7500
       - UPLOAD_DIR=uploads
       - TOP_K_WORDS=50
       - APP_VERSION=3.0.0

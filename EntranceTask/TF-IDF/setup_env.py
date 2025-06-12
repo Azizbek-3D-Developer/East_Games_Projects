@@ -1,6 +1,6 @@
 import os
 
-env_content = """APP_PORT=9000
+env_content = """APP_PORT=7500
 UPLOAD_DIR=uploads
 TOP_K_WORDS=50
 APP_VERSION=3.0.0
