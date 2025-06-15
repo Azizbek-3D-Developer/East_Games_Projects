@@ -23,13 +23,13 @@ PasswordType = Annotated[
     Form(..., title="Password", description="Password with min length 6", min_length=6)
 ]
 
-@router.get("/register", response_class=HTMLResponse)
+@router.get("/register", response_class=HTMLResponse,  tags=["Users"])
 async def register_page(request: Request):
     return templates.TemplateResponse("LandingPage/register-page.html", {"request": request})
 
 
 
-@router.post("/register", summary="Register a new user", response_description="Redirect to landing page on success")
+@router.post("/register", summary="Register a new user",  tags=["Users"], response_description="Redirect to landing page on success")
 async def register_new_user(
     request: Request,
     username: UsernameType,

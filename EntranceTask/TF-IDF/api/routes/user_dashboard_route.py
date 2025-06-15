@@ -8,7 +8,7 @@ from api.schemas.user_schema import UserRead, UserUpdate
 
 
 
-@router.get("/dashboard", response_class=HTMLResponse)
+@router.get("/dashboard", response_class=HTMLResponse, tags=["Dashboard"])
 async def login_to_dashboard(request: Request, user = Depends(get_current_user)):
     return templates.TemplateResponse("Dashboard/dashboard.html", {
         "request": request,
@@ -17,7 +17,7 @@ async def login_to_dashboard(request: Request, user = Depends(get_current_user))
    
    
     
-@router.get("/logout")
+@router.get("/logout",  tags=["Dashboard"])
 async def logout_user():
     response = RedirectResponse(url="/", status_code=303)
     response.delete_cookie("access_token")
@@ -25,7 +25,7 @@ async def logout_user():
 
 
 
-@router.get("/setting", response_class=HTMLResponse)
+@router.get("/setting", response_class=HTMLResponse,  tags=["Users"])
 async def user_settings_page(request: Request, user=Depends(get_current_user)):
     return templates.TemplateResponse("Dashboard/settings-page.html", {
         "request": request,
@@ -34,7 +34,7 @@ async def user_settings_page(request: Request, user=Depends(get_current_user)):
 
 
 
-@router.post("/setting", response_class=HTMLResponse)
+@router.post("/setting", response_class=HTMLResponse,  tags=["Users"])
 async def setting_post(
     request: Request,
     email: str = Form(None),
@@ -67,7 +67,7 @@ async def setting_post(
 
 
 
-@router.put("/{user_id}", response_model=UserRead)
+@router.put("/{user_id}", response_model=UserRead,  tags=["Users"])
 async def update_user_page(user_id: int, user_update: UserUpdate, current_user=Depends(get_current_user)):
     if current_user["id"] != user_id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not authorized to update this user")
@@ -77,7 +77,7 @@ async def update_user_page(user_id: int, user_update: UserUpdate, current_user=D
         raise HTTPException(status_code=404, detail="User not found or update failed")
     return updated_user
 
-@router.post("/setting/{user_id}/delete")
+@router.post("/setting/{user_id}/delete",  tags=["Users"])
 async def delete_user_post(
     user_id: int,
     current_user=Depends(get_current_user)

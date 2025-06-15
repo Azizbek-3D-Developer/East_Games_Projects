@@ -34,12 +34,12 @@ PasswordType = Annotated[
 ]
 
 
-@router.get("/login", response_class=HTMLResponse)
+@router.get("/login", response_class=HTMLResponse, tags=["Users"])
 async def login_page(request: Request):
     return templates.TemplateResponse("LandingPage/login-page.html", {"request": request})
 
 
-@router.post("/login", summary="Login user and set JWT cookie", response_description="Redirect to dashboard if login is successful")
+@router.post("/login", summary="Login user and set JWT cookie", response_description="Redirect to dashboard if login is successful",  tags=["Users"])
 async def login_user(request: Request,  email: UserEmailType, password: PasswordType):
     user = await get_user_by_useremail(email)
     if not user or not verify_password(password, user.password_hash):

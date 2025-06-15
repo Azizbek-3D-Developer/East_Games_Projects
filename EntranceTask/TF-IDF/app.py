@@ -49,7 +49,7 @@ async def internal_exception_handler(request: Request, exc: Exception):
     return templates.TemplateResponse("error-500.html", {"request": request, "error": str(exc)}, status_code=500)
 
 
-@app.get("/test-500")
+@app.get("/test-500",  tags=["Errors"])
 async def test_500_error():
     1 / 0
 

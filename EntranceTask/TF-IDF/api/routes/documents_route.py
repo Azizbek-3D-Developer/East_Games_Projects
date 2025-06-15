@@ -44,7 +44,7 @@ from api.crud.collection_crud import (
 UPLOAD_FOLDER = UPLOAD_DIR
 
 # Documents get all page
-@router.get(f"{baselink}{doclink}", response_class=HTMLResponse)
+@router.get(f"{baselink}{doclink}", response_class=HTMLResponse,  tags=["Documents"])
 async def list_documents(request: Request, user=Depends(get_current_user)):
     documents = await get_all_documents(user.id)
     return templates.TemplateResponse(
@@ -54,7 +54,7 @@ async def list_documents(request: Request, user=Depends(get_current_user)):
 
 
 # Documents Create page loading
-@router.get(f"{baselink}{doclink}/create", response_class=HTMLResponse, name="document_create_form")
+@router.get(f"{baselink}{doclink}/create", response_class=HTMLResponse, name="document_create_form",  tags=["Documents"])
 async def get_upload_page(request: Request, user=Depends(get_current_user)):
     return templates.TemplateResponse(
         "Dashboard/documents/document-create.html",
@@ -63,7 +63,7 @@ async def get_upload_page(request: Request, user=Depends(get_current_user)):
 
 
 # Documents create logic handling
-@router.post(f"{baselink}{doclink}/create", name="document_create")
+@router.post(f"{baselink}{doclink}/create", name="document_create",  tags=["Documents"])
 async def upload_document(
     request: Request,
     file: UploadFile = File(...),
@@ -148,7 +148,7 @@ async def upload_document(
 
 
 # details page
-@router.get(f"{baselink}{doclink}/{{document_id}}", response_class=HTMLResponse, name="document_detail")
+@router.get(f"{baselink}{doclink}/{{document_id}}",  tags=["Documents"], response_class=HTMLResponse, name="document_detail")
 async def document_details(
     request: Request,
     document_id: int,
@@ -199,7 +199,7 @@ async def document_details(
 
 
 # update page load
-@router.get(f"{baselink}{doclink}/{{document_id}}/edit", response_class=HTMLResponse, name="document_edit")
+@router.get(f"{baselink}{doclink}/{{document_id}}/edit", tags=["Documents"], response_class=HTMLResponse, name="document_edit")
 async def document_edit_page(
     request: Request,
     document_id: int,
@@ -220,7 +220,7 @@ async def document_edit_page(
 
 
 # updating the new document
-@router.post(f"{baselink}{doclink}/{{document_id}}/edit", name="document_update")
+@router.post(f"{baselink}{doclink}/{{document_id}}/edit", name="document_update",  tags=["Documents"])
 async def update_document_route(
     request: Request,
     document_id: int,
@@ -326,7 +326,7 @@ async def update_document_route(
     )
 
 
-@router.post(f"{baselink}{doclink}/{{document_id}}/delete", name="document_delete")
+@router.post(f"{baselink}{doclink}/{{document_id}}/delete", name="document_delete",  tags=["Documents"])
 async def delete_document_route(
     request: Request,
     document_id: int,

@@ -13,7 +13,7 @@ from api.crud.collection_document_crud import (
 )
 
 # For page Collections / Details
-@router.post(f"/collections/details/{{collection_id}}/create")
+@router.post(f"/collections/details/{{collection_id}}/create", tags=["Collections-Documents"])
 async def create_collection_document_link_request(
     collection_id: int,
     document_ids: List[int] = Form(...),
@@ -40,7 +40,7 @@ async def create_collection_document_link_request(
 
 
 # For page document details
-@router.post(f"/documents/details/{{document_id}}/create")
+@router.post(f"/documents/details/{{document_id}}/create",  tags=["Collections-Documents"])
 async def create_document_collection_link_request(
     document_id: int,
     collections_ids: List[int] = Form(...),
@@ -67,11 +67,8 @@ async def create_document_collection_link_request(
 
 
 
-
-
-
 # Deleting the connection
-@router.post(f"/collections/details/{{collection_id}}/{{document_id}}/delete")
+@router.post(f"/collections/details/{{collection_id}}/{{document_id}}/delete",  tags=["Collections-Documents"])
 async def delete_collection_document_connection(
     collection_id: int,
     document_id: int,

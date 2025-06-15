@@ -13,7 +13,7 @@ from api.services.tf_idf_service import compute_tfidf_from_text_for_statistics, 
 
 
 # Get All
-@router.get(f"{baselink}{col_link}", response_class=HTMLResponse)
+@router.get(f"{baselink}{col_link}", response_class=HTMLResponse, tags=["Collections"])
 async def list_collections(
     request: Request,
     user = Depends(get_current_user),
@@ -32,7 +32,7 @@ async def list_collections(
     
     
 # Create route    
-@router.get(f"{baselink}{col_link}/create", response_class=HTMLResponse)
+@router.get(f"{baselink}{col_link}/create", response_class=HTMLResponse,  tags=["Collections"])
 async def get_create_page(
     request: Request,
     user = Depends(get_current_user),
@@ -48,7 +48,7 @@ async def get_create_page(
     
   
     
-@router.post(f"{baselink}{col_link}/create")
+@router.post(f"{baselink}{col_link}/create",  tags=["Collections"])
 async def create_new_collection_page(
     request: Request,
     name: str = Form(..., min_length=5, max_length=50),
@@ -68,7 +68,7 @@ async def create_new_collection_page(
   
     
 # details
-@router.get(f"{baselink}{col_link}/{{collection_id}}", response_class=HTMLResponse)
+@router.get(f"{baselink}{col_link}/{{collection_id}}", response_class=HTMLResponse,  tags=["Collections"])
 async def get_details_page(
     request: Request,
     collection_id: int,
@@ -110,7 +110,7 @@ async def get_details_page(
  
  
 # Delete
-@router.post(f"{baselink}{col_link}/{{collection_id}}/delete")
+@router.post(f"{baselink}{col_link}/{{collection_id}}/delete",  tags=["Collections"])
 async def delete_the_collection_page(
     request: Request,
     collection_id: int,
@@ -134,7 +134,7 @@ async def delete_the_collection_page(
         
         
 # Update
-@router.get(f"{baselink}{col_link}/{{collection_id}}/edit")
+@router.get(f"{baselink}{col_link}/{{collection_id}}/edit",  tags=["Collections"])
 async def get_update_page(
     request:Request,
     collection_id: int,
@@ -158,7 +158,7 @@ async def get_update_page(
     
     
     
-@router.post(f"{baselink}{col_link}/{{collection_id}}/edit")
+@router.post(f"{baselink}{col_link}/{{collection_id}}/edit",  tags=["Collections"])
 async def create_new_collection_page(
     request: Request,
     collection_id: int,
@@ -181,7 +181,7 @@ async def create_new_collection_page(
  
  
 # Statistics for collections  
-@router.get(f"{baselink}{col_link}/{{collection_id}}/statistics", response_class=HTMLResponse)
+@router.get(f"{baselink}{col_link}/{{collection_id}}/statistics", response_class=HTMLResponse,  tags=["Collections"])
 async def get_statistics_for_collection_documents_page(
     request: Request,
     collection_id: int,

@@ -8,7 +8,7 @@ from api.utils.dotenv_load import env_loader
 
 APP_VERSION = os.getenv("APP_VERSION", "3.0.0")
 
-@router.get("/version", response_class=HTMLResponse)
+@router.get("/version", response_class=HTMLResponse, tags=["Version"])
 async def status_page(request: Request):
     print(f"version: {APP_VERSION}") 
     return templates.TemplateResponse(

@@ -6,7 +6,7 @@ from api.auth.dependencies import get_current_user
 from api.db import metrics_service
 
 
-@router.get("/metrics", response_class=HTMLResponse)
+@router.get("/metrics", response_class=HTMLResponse, tags=["Metrics"])
 async def status_page(request: Request, user=Depends(get_current_user)):
     metrics = await metrics_service.get_metrics()
     return templates.TemplateResponse("Dashboard/metrics.html", {

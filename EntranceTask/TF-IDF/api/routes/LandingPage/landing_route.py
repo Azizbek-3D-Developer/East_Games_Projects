@@ -5,7 +5,7 @@ from api.utils.router import router
 
 
 # Render the Landing Page of the Web Service
-@router.get("/", response_class=HTMLResponse)
+@router.get("/", response_class=HTMLResponse, tags=["Landing Page"])
 async def landing_page(request: Request):
     return templates.TemplateResponse("LandingPage/landing-page.html", {"request": request})
 

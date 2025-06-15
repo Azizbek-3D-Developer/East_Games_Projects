@@ -7,7 +7,10 @@ from api.auth.dependencies import get_current_user
 from api.crud.huffman_crud import get_huffman_by_document
 from api.crud.documents_crud import get_document_by_id
 
-@router.get(f"{baselink}/documents/{{document_id}}/huffman", response_class=HTMLResponse)
+
+
+
+@router.get(f"{baselink}/documents/{{document_id}}/huffman", response_class=HTMLResponse, tags=["Huffman"])
 async def huffman_detail_page(
     request: Request,
     document_id: int,
